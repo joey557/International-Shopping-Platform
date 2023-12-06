@@ -39,7 +39,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tableenterprise = new javax.swing.JTable();
+        tableEnterprise = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
@@ -48,7 +48,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
-        Tableenterprise.setModel(new javax.swing.table.DefaultTableModel(
+        tableEnterprise.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -67,10 +67,10 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Tableenterprise.setRowHeight(40);
-        Tableenterprise.setRowMargin(4);
-        Tableenterprise.setSelectionBackground(new java.awt.Color(215, 145, 54));
-        jScrollPane1.setViewportView(Tableenterprise);
+        tableEnterprise.setRowHeight(40);
+        tableEnterprise.setRowMargin(4);
+        tableEnterprise.setSelectionBackground(new java.awt.Color(215, 145, 54));
+        jScrollPane1.setViewportView(tableEnterprise);
 
         jLabel1.setText("Username:");
 
@@ -158,11 +158,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
-        int selectedRow = Tableenterprise.getSelectedRow();
+        int selectedRow = tableEnterprise.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from table first to update username and password.", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            String name = (String) Tableenterprise.getModel().getValueAt(selectedRow, 0);
+            String name = (String) tableEnterprise.getModel().getValueAt(selectedRow, 0);
             
             Enterprise ep = business.getEnterpriselist().findEpByName(name);
             UserAccount acc = ep.getAcc();
@@ -180,13 +180,13 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Tableenterprise;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tableEnterprise;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
@@ -199,8 +199,14 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             
             Object[] row = new Object[3];
             row[0] = ep.getName();
-            row[1] = ep.getAcc().getUsername();
-            row[2] = ep.getAcc().getPassword();
+            if (ep.getAcc().getUsername() == null && ep.getAcc().getPassword() == null){
+                row[1] = "Create the username";
+                row[2] = "Create the password";
+            } else {
+                row[1] = ep.getAcc().getUsername();
+                row[2] = ep.getAcc().getPassword();
+            }
+         
             
             model.addRow(row);
             

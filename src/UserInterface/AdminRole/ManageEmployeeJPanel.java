@@ -4,6 +4,10 @@
  */
 package UserInterface.AdminRole;
 
+import Business.Business;
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author peifang
@@ -15,6 +19,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
      */
     public ManageEmployeeJPanel() {
         initComponents();
+    }
+
+    ManageEmployeeJPanel(Enterprise ep, Business business, JPanel CardSequencePanel) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

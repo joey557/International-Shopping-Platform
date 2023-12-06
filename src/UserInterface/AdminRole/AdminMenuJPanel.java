@@ -4,6 +4,10 @@
  */
 package UserInterface.AdminRole;
 
+import Business.Business;
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author peifang
@@ -13,8 +17,15 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminMenuJPanel
      */
-    public AdminMenuJPanel() {
+    Enterprise ep;
+    Business business;
+    JPanel CardSequencePanel;
+    
+    public AdminMenuJPanel(Enterprise ep, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
+        this.business = business;
+        this.CardSequencePanel = CardSequencePanel;
     }
 
     /**
@@ -67,6 +78,10 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
+        ManageEmployeeJPanel manageemployeeworkarea = new ManageEmployeeJPanel(ep, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("AdminMenuJPanel", manageemployeeworkarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed

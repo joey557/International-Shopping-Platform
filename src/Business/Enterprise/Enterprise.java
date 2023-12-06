@@ -21,6 +21,12 @@ public class Enterprise{
     private String address;
     private UserAccount acc;
 
+    public Enterprise(){
+        
+        acc = new UserAccount();
+        
+    }
+        
     public UserAccount getAcc() {
         return acc;
     }
