@@ -192,7 +192,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) Tableenterprise.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableEnterprise.getModel();
         model.setRowCount(0);
         
         for (Enterprise ep: business.getEnterpriselist().getEnterpriselist()){
