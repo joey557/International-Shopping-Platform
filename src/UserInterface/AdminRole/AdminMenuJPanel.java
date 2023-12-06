@@ -4,6 +4,10 @@
  */
 package UserInterface.AdminRole;
 
+import Business.Business;
+import Business.Enterprise.Enterprise;
+import javax.swing.JPanel;
+
 /**
  *
  * @author peifang
@@ -13,8 +17,15 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminMenuJPanel
      */
-    public AdminMenuJPanel() {
+    Enterprise ep;
+    Business business;
+    JPanel CardSequencePanel;
+    
+    public AdminMenuJPanel(Enterprise ep, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
+        this.business = business;
+        this.CardSequencePanel = CardSequencePanel;
     }
 
     /**
@@ -26,20 +37,20 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnManageEmployee = new javax.swing.JButton();
+        btnManageUserAccount = new javax.swing.JButton();
 
-        jButton1.setText("Manage Employee");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnManageEmployee.setText("Manage Employee");
+        btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnManageEmployeeActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Manage User Account");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnManageUserAccount.setText("Manage User Account");
+        btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnManageUserAccountActionPerformed(evt);
             }
         });
 
@@ -49,9 +60,9 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(184, 184, 184)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -59,23 +70,27 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(384, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ManageEmployeeJPanel manageemployeeworkarea = new ManageEmployeeJPanel(ep, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("AdminMenuJPanel", manageemployeeworkarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnManageUserAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnManageEmployee;
+    private javax.swing.JButton btnManageUserAccount;
     // End of variables declaration//GEN-END:variables
 }

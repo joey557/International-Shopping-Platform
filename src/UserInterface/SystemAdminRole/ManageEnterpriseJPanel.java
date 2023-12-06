@@ -38,9 +38,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tableenterprise = new javax.swing.JTable();
+        tableEnterprise = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        ComboBoxenterprise = new javax.swing.JComboBox();
+        comboBoxenterprise = new javax.swing.JComboBox();
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
 
-        Tableenterprise.setModel(new javax.swing.table.DefaultTableModel(
+        tableEnterprise.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -71,17 +71,17 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Tableenterprise.setRowHeight(40);
-        Tableenterprise.setRowMargin(4);
-        Tableenterprise.setSelectionBackground(new java.awt.Color(215, 145, 54));
-        jScrollPane1.setViewportView(Tableenterprise);
+        tableEnterprise.setRowHeight(40);
+        tableEnterprise.setRowMargin(4);
+        tableEnterprise.setSelectionBackground(new java.awt.Color(215, 145, 54));
+        jScrollPane1.setViewportView(tableEnterprise);
 
         jLabel3.setText("Enterprise Type");
 
-        ComboBoxenterprise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wholesaler", "Shipping and Delivery Company", "E-commerce platform" }));
-        ComboBoxenterprise.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxenterprise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wholesaler", "Shipping and Delivery Company", "E-commerce platform" }));
+        comboBoxenterprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxenterpriseActionPerformed(evt);
+                comboBoxenterpriseActionPerformed(evt);
             }
         });
 
@@ -132,7 +132,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel5))
                                 .addGap(67, 67, 67)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboBoxenterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxenterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -161,17 +161,13 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboBoxenterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxenterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,13 +181,13 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                     .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBack)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboBoxenterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxenterpriseActionPerformed
+    private void comboBoxenterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxenterpriseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBoxenterpriseActionPerformed
+    }//GEN-LAST:event_comboBoxenterpriseActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         SystemAdminMenuJPanel systemadminmenuarea = new SystemAdminMenuJPanel(business, userProcessContainer);
@@ -202,7 +198,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        String type = ComboBoxenterprise.getSelectedItem().toString();
+        String type = comboBoxenterprise.getSelectedItem().toString();
         String name = txtName.getText();
         String email = txtEmail.getText();
         String address = txtAddress.getText();
@@ -215,7 +211,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(this, "New enterprise added.");
 
-        ComboBoxenterprise.setSelectedItem("Wholesaler");
+        comboBoxenterprise.setSelectedItem("Wholesaler");
         txtName.setText("");
         txtEmail.setText("");
         txtAddress.setText("");
@@ -223,11 +219,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = Tableenterprise.getSelectedRow();
+        int selectedRow = tableEnterprise.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from table first to delete.", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            String name = (String) Tableenterprise.getModel().getValueAt(selectedRow, 0);
+            String name = (String) tableEnterprise.getModel().getValueAt(selectedRow, 0);
             
             business.getEnterpriselist().deleteEpByName(name);
             populateTable();
@@ -236,24 +232,24 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox ComboBoxenterprise;
-    private javax.swing.JTable Tableenterprise;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox comboBoxenterprise;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tableEnterprise;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) Tableenterprise.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableEnterprise.getModel();
         model.setRowCount(0);
         
         for (Enterprise ep: business.getEnterpriselist().getEnterpriselist()){

@@ -46,4 +46,14 @@ public class EnterpriseDirectory {
         return null;
     }
     
+        public Enterprise findAccount(String username, String password){
+        for (Enterprise ep : enterpriselist) {
+            if (ep.getAcc().getUsername().equals(username) && ep.getAcc().getPassword().equals(password)) {
+                return ep;
+            }
+        }
+        return null;
+    }
+        
+    
 }
