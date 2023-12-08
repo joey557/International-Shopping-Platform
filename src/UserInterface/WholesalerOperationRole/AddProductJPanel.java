@@ -2,7 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package userinterface.WholesalerOperationRole;
+package UserInterface.WholesalerOperationRole;
+
+import Business.Business;
+import Business.Product.Product;
+import Business.Product.ProductDirectory;
+import UserInterface.AccountingRole.AccountingMenuJPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,8 +20,12 @@ public class AddProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddProductJPanel
      */
-    public AddProductJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public AddProductJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -32,14 +43,14 @@ public class AddProductJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCategory = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
         txtQuantity = new javax.swing.JTextField();
         Desc = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescription = new javax.swing.JTextArea();
+        comboCategory = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel1.setText("Add New Product");
@@ -57,12 +68,6 @@ public class AddProductJPanel extends javax.swing.JPanel {
         jLabel4.setText("Category:");
 
         jLabel5.setText("Quantity:");
-
-        txtCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCategoryActionPerformed(evt);
-            }
-        });
 
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,10 +91,17 @@ public class AddProductJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescription.setColumns(20);
+        txtDescription.setRows(5);
+        jScrollPane1.setViewportView(txtDescription);
+
+        comboCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tops", "Bottoms", "Outwear", "Accessories" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,19 +122,21 @@ public class AddProductJPanel extends javax.swing.JPanel {
                                     .addComponent(Desc))
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(comboCategory, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.LEADING)))))
                         .addGap(0, 175, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnAdd)))
                 .addGap(145, 145, 145))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,10 +148,10 @@ public class AddProductJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                    .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -152,19 +166,15 @@ public class AddProductJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnAdd))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btnBack)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
-
-    private void txtCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
         // TODO add your handling code here:
@@ -176,21 +186,44 @@ public class AddProductJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        String name = txtName.getText();
+        String category = comboCategory.getSelectedItem().toString();
+        int price = Integer.parseInt(txtPrice.getText());
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        String description = txtDescription.getText();
+        
+        //TODO: validation
+        Product newproduct = business.getWholesalerproductlist().addProduct();
+        newproduct.setName(name);
+        newproduct.setCategory(category);
+        newproduct.setPrice(price);
+        newproduct.setQuantity(quantity);
+        newproduct.setDescription(description);
+
+        JOptionPane.showMessageDialog(this, "New product added");
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        WholesalerOperationMenuJPanel operationworkarea = new WholesalerOperationMenuJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("WholesalerOperationMenuJPanel", operationworkarea);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Desc;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox<String> comboCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField txtCategory;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuantity;

@@ -4,6 +4,12 @@
  */
 package UserInterface.AccountingRole;
 
+import Business.Business;
+import Business.Product.Product;
+import javax.swing.JPanel;
+import UserInterface.AccountingRole.AccountingMenuJPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author peifang
@@ -13,8 +19,14 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewRevenueReportJPanel
      */
-    public ViewRevenueReportJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public ViewRevenueReportJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business = business;
+        
+        populateTable();
     }
 
     /**
@@ -109,7 +121,10 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-
+        AccountingMenuJPanel accountingworkarea = new AccountingMenuJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("AccountingMenuJpanel", accountingworkarea);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
@@ -121,4 +136,21 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblRevenue;
     private javax.swing.JTextField txtTotalRevenue;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblRevenue.getModel();
+        model.setRowCount(0);
+        int totalRevenue = 0;
+        
+        for (Product p : business.getWholesalerproductlist().getProductDirectory()) { // based on wholesaler or e-commerce
+            Object row[] = new Object[4];
+            row[0] = p.getName();
+            row[1] = p.getPrice();
+            row[2] = p.getSoldQuantity();
+            row[3] = p.getPrice() * p.getSoldQuantity();
+            model.addRow(row);
+            totalRevenue += p.getPrice() * p.getSoldQuantity();
+            txtTotalRevenue.setText(Integer.toString(totalRevenue));
+        }   
+    }
 }

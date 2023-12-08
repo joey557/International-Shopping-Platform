@@ -168,11 +168,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             UserAccount acc = ep.getAcc();
             acc.setUsername(username);
             acc.setPassword(password);
+            JOptionPane.showMessageDialog(this, "Username and password has been successfully updated.");
             populateTable();
+            
         }
         
-        
-        JOptionPane.showMessageDialog(this, "Username and password has been successfully updated.");
 
         txtUsername.setText("");
         txtPassword.setText("");

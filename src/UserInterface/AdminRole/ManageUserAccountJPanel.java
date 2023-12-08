@@ -4,6 +4,15 @@
  */
 package UserInterface.AdminRole;
 
+import Business.Business;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Role.Role;
+import Business.UserAccount.UserAccountDirectory;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author peifang
@@ -13,8 +22,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageUserAccountJPanel
      */
-    public ManageUserAccountJPanel() {
+    Enterprise ep;
+    Business business;
+    Employee ee;
+    JPanel CardSequencePanel;
+
+    ManageUserAccountJPanel(Enterprise ep,Employee ee, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
+        this.business = business;
+        this.ee = ee;
+        this.CardSequencePanel = CardSequencePanel;
+        txtEmployeeName.setText(ee.getName());
     }
 
     /**
@@ -76,8 +95,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Operation", "Accountant" }));
 
         btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Organization:");
+
+        comboOrganization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marketing", "Sales", "Customer Service", "Accounting", " " }));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -173,8 +199,46 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-
+        
+        AdminMenuJPanel adminmenuarea = new AdminMenuJPanel(ep, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("AdminMenuJPanel", adminmenuarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        String orgtype = comboOrganization.getSelectedItem().toString();
+        String role = comboRole.getSelectedItem().toString();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        
+        Role newrole = new Role();
+        newrole.setType(role);
+        
+        if (ep.getOrganizationDirectory().findOrgbyName(orgtype) != null) {
+            Organization org = ep.getOrganizationDirectory().findOrgbyName(orgtype);
+            UserAccountDirectory acclist = org.getAcclist();
+            acclist.createUser(username, password, ee, newrole);
+            UserAccountDirectory epacclist = ep.getEeacclist();
+            epacclist.createUser(username, password, ee, newrole);
+        } else {
+            Organization org = new Organization();
+            org.setName(orgtype);
+            UserAccountDirectory useracclist = new UserAccountDirectory();
+            useracclist.createUser(username, password, ee, newrole);
+            UserAccountDirectory epacclist = ep.getEeacclist();
+            epacclist.createUser(username, password, ee, newrole);
+            org.setAcclist(useracclist);
+            ep.getOrganizationDirectory().addNeworg(org);
+        }
+        
+        JOptionPane.showMessageDialog(this, "New employee's user account created successfully.");
+        
+        
+        
+        
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

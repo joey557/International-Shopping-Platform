@@ -5,8 +5,12 @@
 package UserInterface.AdminRole;
 
 import Business.Business;
+import Business.Employee.Employee;
+import Business.Employee.EmployeeDirectory;
 import Business.Enterprise.Enterprise;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +21,19 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageEmployeeJPanel
      */
-    public ManageEmployeeJPanel() {
-        initComponents();
-    }
-
+    Enterprise ep;
+    Business business;
+    JPanel CardSequencePanel;
+    
+    
+    
+   
     ManageEmployeeJPanel(Enterprise ep, Business business, JPanel CardSequencePanel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        initComponents();
+        this.ep = ep;
+        this.business = business;
+        this.CardSequencePanel = CardSequencePanel;
+        populateTable();
     }
 
     /**
@@ -41,6 +52,9 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         tblEmployee = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        Label = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        btnCreateAccount = new javax.swing.JButton();
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Manage Employee");
@@ -68,12 +82,26 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEmployee);
 
-        btnCreate.setText("Create");
+        btnCreate.setText("Add Employee");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
+            }
+        });
+
+        Label.setText("ID:");
+
+        btnCreateAccount.setText("Create UserAccount");
+        btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAccountActionPerformed(evt);
             }
         });
 
@@ -87,20 +115,30 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                         .addGap(330, 330, 330)
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(jLabel1)
-                        .addGap(39, 39, 39)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(359, 359, 359)
-                        .addComponent(btnCreate))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(btnBack)))
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(358, 358, 358)
+                        .addComponent(btnCreate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(39, 39, 39)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCreateAccount)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,28 +149,100 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addComponent(btnCreate)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(btnCreateAccount)
+                .addGap(19, 19, 19)
                 .addComponent(btnBack)
                 .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-
+        AdminMenuJPanel adminmenuarea = new AdminMenuJPanel(ep, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("AdminMenuJPanel", adminmenuarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+        
+        
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtID.getText());
+        String name = txtName.getText();
+        
+        EmployeeDirectory employeelist = ep.getEmployeelist();
+        employeelist.addnewperson(name, id);
+        
+        
+        JOptionPane.showMessageDialog(this, "New employee added.");
+
+        
+        txtName.setText("");
+        Label.setText("");
+        populateTable();
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblEmployee.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row from table first to create user account.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int id = Integer.parseInt(tblEmployee.getModel().getValueAt(selectedRow, 0).toString());
+            Employee ee = ep.getEmployeelist().findEEById(id);
+            ManageUserAccountJPanel accountarea = new ManageUserAccountJPanel(ep, ee,  business, CardSequencePanel);
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add("ManageUserAccountJPanel", accountarea);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+            
+            
+        } 
+    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnCreateAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblEmployee;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblEmployee.getModel();
+        model.setRowCount(0);
+        
+        for (Employee employee: ep.getEmployeelist().getEmployeelist()){
+            
+            Object[] row = new Object[2];
+            row[0] = employee.getId();
+            row[1] = employee.getName();
+            
+            
+            
+            model.addRow(row);
+            
+        }
+    
+    }
 }

@@ -215,6 +215,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         txtName.setText("");
         txtEmail.setText("");
         txtAddress.setText("");
+        populateTable();
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
