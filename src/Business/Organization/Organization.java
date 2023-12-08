@@ -15,9 +15,40 @@ import Business.WorkQueue.WorkQueue;
 public class Organization {
     
     public String name;
-    private EmployeeDirectory employeelist;
     private UserAccountDirectory acclist;
     private WorkQueue workqueue;
+    
+//    Organization(String orgname) {
+//        
+//        this.name = orgname;
+//        this.acclist = new UserAccountDirectory();
+//        this.workqueue = new WorkQueue();
+//        
+//    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public UserAccountDirectory getAcclist() {
+        return acclist;
+    }
+
+    public void setAcclist(UserAccountDirectory acclist) {
+        this.acclist = acclist;
+    }
+
+    public WorkQueue getWorkqueue() {
+        return workqueue;
+    }
+
+    public void setWorkqueue(WorkQueue workqueue) {
+        this.workqueue = workqueue;
+    }
     
            
 }

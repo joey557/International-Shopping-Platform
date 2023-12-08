@@ -22,4 +22,17 @@ public class OrganizationDirectory {
         return organizationlist;
     }
     
+    public Organization addNeworg(Organization org) {
+        organizationlist.add(org);
+        return org;
+    }
+    
+    public Organization findOrgbyName(String name) {
+        for (Organization org : organizationlist) {
+            if (org.getName().equals(name)) {
+                return org;
+            }
+        }
+        return null;
+    }
 }

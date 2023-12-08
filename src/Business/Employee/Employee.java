@@ -12,12 +12,9 @@ public class Employee {
     
     private int id;
     private String name;
-    private static int count = 1;
+   
     
-    public Employee() {
-        id = count;
-        count ++;
-    }
+    
 
     public String getName() {
         return name;
@@ -27,8 +24,13 @@ public class Employee {
         this.name = name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
     
 }
+
