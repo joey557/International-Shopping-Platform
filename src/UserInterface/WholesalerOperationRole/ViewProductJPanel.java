@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package userinterface.WholesalerOperationRole;
+package UserInterface.WholesalerOperationRole;
+
+import Business.Business;
+import Business.Product.Product;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,8 +18,14 @@ public class ViewProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewProductJPanel
      */
-    public ViewProductJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public ViewProductJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business = business;
+        
+        populateTable();
     }
 
     /**
@@ -27,18 +38,22 @@ public class ViewProductJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboType = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
-        btnRefresh = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel1.setText("View Inventory");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Category", " " }));
+        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Category" }));
+        comboType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTypeActionPerformed(evt);
+            }
+        });
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -46,10 +61,6 @@ public class ViewProductJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-
-        btnRefresh.setText("Refresh");
-
-        btnUpdate.setText("Update");
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,34 +75,30 @@ public class ViewProductJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblProduct);
 
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(55, 55, 55)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSearch)))
-                            .addGap(287, 287, 287))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(423, 423, 423)
-                            .addComponent(btnUpdate)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(423, 423, 423)
-                        .addComponent(btnRefresh))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(416, Short.MAX_VALUE))
+                        .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch))
+                    .addComponent(btnBack)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,32 +107,109 @@ public class ViewProductJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
-                .addGap(18, 18, 18)
-                .addComponent(btnRefresh)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(btnBack)
+                .addGap(152, 152, 152))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        model.setRowCount(0);
+        String searchType = comboType.getSelectedItem().toString();
+        String keyword = txtSearch.getText();
+        
+        if (searchType.equals("ID")) {
+            for (Product p: business.getWholesalerproductlist().getProductDirectory()){
+                if (Integer.toString(p.getId()).equals(keyword)){
+                    Object row[] = new Object[6];
+                    row[0] = p.getId();
+                    row[1] = p.getName();
+                    row[2] = p.getCategory();
+                    row[3] = p.getPrice();
+                    row[4] = p.getQuantity();
+                    row[5] = p.getDescription();
+                    model.addRow(row);
+                }
+            }
+        }
+        
+        if (searchType.equals("Name")) {
+            for (Product p: business.getWholesalerproductlist().getProductDirectory()){
+                if (p.getName().equals(keyword)){
+                    Object row[] = new Object[6];
+                    row[0] = p.getId();
+                    row[1] = p.getName();
+                    row[2] = p.getCategory();
+                    row[3] = p.getPrice();
+                    row[4] = p.getQuantity();
+                    row[5] = p.getDescription();
+                    model.addRow(row);
+                }
+            }
+        }
+        
+        if (searchType.equals("Category")) {
+            for (Product p: business.getWholesalerproductlist().getProductDirectory()){
+                if (p.getCategory().equals(keyword)){
+                    Object row[] = new Object[6];
+                    row[0] = p.getId();
+                    row[1] = p.getName();
+                    row[2] = p.getCategory();
+                    row[3] = p.getPrice();
+                    row[4] = p.getQuantity();
+                    row[5] = p.getDescription();
+                    model.addRow(row);
+                }
+            }
+        }
+
+
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        WholesalerOperationMenuJPanel operationworkarea = new WholesalerOperationMenuJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("WholesalerOperationMenuJPanel", operationworkarea);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void comboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTypeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        model.setRowCount(0);
+        
+        for (Product p : business.getWholesalerproductlist().getProductDirectory()) {
+            Object row[] = new Object[6];
+            row[0] = p.getId();
+            row[1] = p.getName();
+            row[2] = p.getCategory();
+            row[3] = p.getPrice();
+            row[4] = p.getQuantity();
+            row[5] = p.getDescription();
+            model.addRow(row);
+        }   
+    }  
 }

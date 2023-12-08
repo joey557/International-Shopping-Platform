@@ -4,6 +4,10 @@
  */
 package UserInterface.AccountingRole;
 
+import UserInterface.AccountingRole.ViewRevenueReportJPanel;
+import Business.Business;
+import javax.swing.JPanel;
+
 /**
  *
  * @author peifang
@@ -13,8 +17,12 @@ public class AccountingMenuJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AccountingMenuJPanel
      */
-    public AccountingMenuJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public AccountingMenuJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business = business;
     }
 
     /**
@@ -55,6 +63,10 @@ public class AccountingMenuJPanel extends javax.swing.JPanel {
 
     private void btnViewReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewReportActionPerformed
         // TODO add your handling code here:
+        ViewRevenueReportJPanel vrrj = new ViewRevenueReportJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("ViewRevenueReportJPanel", vrrj);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnViewReportActionPerformed
 
 

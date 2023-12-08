@@ -18,16 +18,25 @@ public class EmployeeDirectory {
         employeelist = new ArrayList();
     }
 
-    public Employee addnewperson(String name){
+    public Employee addnewperson(String name, int id){
         Employee employee = new Employee();
         employee.setName(name);
+        employee.setId(id);
         employeelist.add(employee);
         return employee;
     }
+    
     
     public ArrayList<Employee> getEmployeelist() {
         return employeelist;
     }
     
-    
+    public Employee findEEById(int id) {
+        for (Employee ee: employeelist) {
+            if (ee.getId() == id) {
+                return ee;
+            }
+        }
+        return null;
+    }
 }

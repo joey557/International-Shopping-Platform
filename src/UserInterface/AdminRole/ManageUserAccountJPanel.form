@@ -178,6 +178,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -187,7 +190,13 @@
     <Component class="javax.swing.JComboBox" name="comboOrganization">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Marketing"/>
+            <StringItem index="1" value="Sales"/>
+            <StringItem index="2" value="Customer Service"/>
+            <StringItem index="3" value="Accounting"/>
+            <StringItem index="4" value=" "/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>

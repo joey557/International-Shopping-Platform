@@ -16,19 +16,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnView" max="32767" attributes="0"/>
-                          <Component id="btnAdd" max="32767" attributes="0"/>
-                          <Component id="btnManageOrder" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnAddProduct" max="32767" attributes="0"/>
+                          <Component id="btnManageInventory" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnViewProduct" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -46,44 +41,32 @@
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+              <Component id="btnAddProduct" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnView" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnManageOrder" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="174" max="32767" attributes="0"/>
+              <Component id="btnViewProduct" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="btnManageInventory" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="248" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnAdd">
+    <Component class="javax.swing.JButton" name="btnAddProduct">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Product"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddProductActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnView">
+    <Component class="javax.swing.JButton" name="btnManageInventory">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Inventory"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnManageOrder">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Orders"/>
+        <Property name="text" type="java.lang.String" value="Manage Inventory"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageOrderActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageInventoryActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnBack">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;&lt;Back"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -92,6 +75,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="WholeSaler Operations Panel"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewProductActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

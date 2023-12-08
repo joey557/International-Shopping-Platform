@@ -38,7 +38,6 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnManageEmployee = new javax.swing.JButton();
-        btnManageUserAccount = new javax.swing.JButton();
 
         btnManageEmployee.setText("Manage Employee");
         btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -47,32 +46,21 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnManageUserAccount.setText("Manage User Account");
-        btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageUserAccountActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(184, 184, 184)
+                .addGap(256, 256, 256)
                 .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92)
-                .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(380, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addGap(165, 165, 165)
+                .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(376, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -80,17 +68,12 @@ public class AdminMenuJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         ManageEmployeeJPanel manageemployeeworkarea = new ManageEmployeeJPanel(ep, business, CardSequencePanel);
         CardSequencePanel.removeAll();
-        CardSequencePanel.add("AdminMenuJPanel", manageemployeeworkarea);
+        CardSequencePanel.add("ManageEmployeeJPanel", manageemployeeworkarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
-
-    private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnManageUserAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageEmployee;
-    private javax.swing.JButton btnManageUserAccount;
     // End of variables declaration//GEN-END:variables
 }

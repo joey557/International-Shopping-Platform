@@ -8,6 +8,7 @@ import Business.Business;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import UserInterface.AdminRole.AdminMenuJPanel;
+import UserInterface.SystemAdminRole.SystemAdminMenuJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -111,25 +112,10 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(actionsidePanel);
 
         CardSequencePanel.setBackground(new java.awt.Color(234, 244, 244));
+        CardSequencePanel.setLayout(new java.awt.CardLayout());
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/homepage.png"))); // NOI18N
-
-        javax.swing.GroupLayout CardSequencePanelLayout = new javax.swing.GroupLayout(CardSequencePanel);
-        CardSequencePanel.setLayout(CardSequencePanelLayout);
-        CardSequencePanelLayout.setHorizontalGroup(
-            CardSequencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CardSequencePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        CardSequencePanelLayout.setVerticalGroup(
-            CardSequencePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CardSequencePanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
+        CardSequencePanel.add(jLabel3, "card2");
 
         jSplitPane1.setRightComponent(CardSequencePanel);
 
@@ -160,6 +146,11 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
             AdminMenuJPanel adminworkarea = new AdminMenuJPanel(ep, business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("AdminMenuJPanel", adminworkarea);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        } else if (un.equals("admin") && pw.equals("XXXX")) {
+            SystemAdminMenuJPanel systemadminworkarea = new SystemAdminMenuJPanel(business, CardSequencePanel);
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add("SystemAdminMenuJPanel", systemadminworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
         
