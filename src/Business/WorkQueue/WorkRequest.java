@@ -13,15 +13,15 @@ import java.util.Date;
  */
 public class WorkRequest {
     
-    public String message;
-    private Date reqdate;
-    private Date resdate;
+    private String message;
     private UserAccount sender;
     private UserAccount receiver;
     private String status;
+    private Date requestDate;
+    private Date resolveDate;
     
     public WorkRequest(){
-        reqdate = new Date(); 
+        requestDate = new Date();
     }
 
     public String getMessage() {
@@ -30,22 +30,6 @@ public class WorkRequest {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Date getReqdate() {
-        return reqdate;
-    }
-
-    public void setReqdate(Date reqdate) {
-        this.reqdate = reqdate;
-    }
-
-    public Date getResdate() {
-        return resdate;
-    }
-
-    public void setResdate(Date resdate) {
-        this.resdate = resdate;
     }
 
     public UserAccount getSender() {
@@ -71,7 +55,28 @@ public class WorkRequest {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public Date getResolveDate() {
+        return resolveDate;
+    }
+
+    public void setResolveDate(Date resolveDate) {
+        this.resolveDate = resolveDate;
+    }
     
+    @Override
+    
+    public String toString(){
+        return this.message;
+    }
     
 }
 
