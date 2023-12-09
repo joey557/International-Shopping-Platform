@@ -5,7 +5,7 @@
 package Business.Enterprise;
 
 import Business.Employee.EmployeeDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Product.ProductDirectory;
@@ -26,7 +26,7 @@ public class Enterprise{
     private String address;
     private UserAccount acc;
     private UserAccountDirectory eeacclist;
-    private OrderDirectory orderlist;
+    private Order orderlist;
 
     public Enterprise(){
         
@@ -34,7 +34,7 @@ public class Enterprise{
         employeelist = new EmployeeDirectory();
         organizationDirectory = new OrganizationDirectory();
         eeacclist = new UserAccountDirectory();
-        orderlist = new OrderDirectory();
+        orderlist = new Order();
          
     }
 
@@ -46,11 +46,11 @@ public class Enterprise{
         this.eeacclist = eeacclist;
     }
 
-    public OrderDirectory getOrderlist() {
+    public Order getOrderlist() {
         return orderlist;
     }
 
-    public void setOrderlist(OrderDirectory orderlist) {
+    public void setOrderlist(Order orderlist) {
         this.orderlist = orderlist;
     }
     

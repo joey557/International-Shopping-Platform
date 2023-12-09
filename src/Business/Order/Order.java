@@ -4,9 +4,9 @@
  */
 package Business.Order;
 
+import Business.Order.OrderItem;
 import Business.Product.Product;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,15 +14,17 @@ import java.util.Map;
  */
 public class Order {
     
-    Map<Product, Integer> order;
-    String status;
-
-    public Map<Product, Integer> getOrder() {
-        return order;
-    }
-
-    public void setOrder(Map<Product, Integer> order) {
-        this.order = order;
+    
+    ArrayList<OrderItem> orderItemList;
+    private int id;
+    private static int count = 1;
+    private String status;
+    private String customer;
+    
+    public Order() {
+        this.orderItemList = new ArrayList<OrderItem>();  
+        id = count;
+        count ++;
     }
 
     public String getStatus() {
@@ -33,5 +35,52 @@ public class Order {
         this.status = status;
     }
     
+    public int getId() {
+        return id;
+    }
     
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+    
+    public ArrayList<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(ArrayList<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+    
+    public void addNewOrderItem(Product product, int quantity){
+        OrderItem orderItem = new OrderItem(product, quantity);
+        orderItemList.add(orderItem);
+    }
+    
+    public void deleteItem(OrderItem item){
+        this.orderItemList.remove(item);
+    }
+    
+    public OrderItem findProduct(Product product){
+        
+        for (OrderItem oi : this.getOrderItemList()){
+            if (oi.getProduct().equals(product)){
+                return oi;
+            }
+        }
+        return null;
+    }
+    
+    public int Totalamount() {
+        int count = 0;
+        for (OrderItem orderitem : orderItemList) {
+            count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
+        }
+        return count;
+    }
+    
+   
 }

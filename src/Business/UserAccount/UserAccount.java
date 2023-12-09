@@ -5,6 +5,7 @@
 package Business.UserAccount;
 
 import Business.Employee.Employee;
+import Business.Order.MasterOrderList;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
 
@@ -18,7 +19,16 @@ public class UserAccount {
     private String password;
     private Employee employee;
     private Role role;
+    private MasterOrderList masterorderlist;
     private WorkQueue workQueue;
+
+    public MasterOrderList getMasterorderlist() {
+        return masterorderlist;
+    }
+
+    public void setMasterorderlist(MasterOrderList masterorderlist) {
+        this.masterorderlist = masterorderlist;
+    }
     
     public String getUsername() {
         return username;
