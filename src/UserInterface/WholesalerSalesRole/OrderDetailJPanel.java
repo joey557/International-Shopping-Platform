@@ -4,6 +4,12 @@
  */
 package UserInterface.WholesalerSalesRole;
 
+import Business.Business;
+import Business.Order.Order;
+import Business.Order.OrderItem;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joey
@@ -13,8 +19,16 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
     /**
      * Creates new form OrderDetailJPanel
      */
-    public OrderDetailJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    Order order;
+    public OrderDetailJPanel(JPanel userProcessContainer, Order order) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.order = order;
+        
+        populateTable();
+        txtOrderId.setText(Integer.toString(order.getId()));
     }
 
     /**
@@ -29,9 +43,9 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetail = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtOrderId = new javax.swing.JTextField();
         btnBack1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSendPackage = new javax.swing.JButton();
 
         tblDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -48,15 +62,26 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("OrderID:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtOrderId.setEnabled(false);
+        txtOrderId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtOrderIdActionPerformed(evt);
             }
         });
 
         btnBack1.setText("<<Back");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Send package");
+        btnSendPackage.setText("Send package");
+        btnSendPackage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendPackageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,51 +91,78 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(btnSendPackage))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(462, 462, 462)
                         .addComponent(btnBack1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                    .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnSendPackage)
                 .addGap(18, 18, 18)
                 .addComponent(btnBack1)
                 .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtOrderIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtOrderIdActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here:
+        ManageOrderJPanel salesworkarea = new ManageOrderJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("ManageOrderJPanel", salesworkarea);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
+    }//GEN-LAST:event_btnBack1ActionPerformed
+
+    private void btnSendPackageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendPackageActionPerformed
+        // TODO add your handling code here:
+        order.setStatus("Send for delivery");
+    }//GEN-LAST:event_btnSendPackageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSendPackage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblDetail;
+    private javax.swing.JTextField txtOrderId;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblDetail.getModel();
+        model.setRowCount(0);
+
+        for (OrderItem orderitem: order.getOrderItemList()) {
+
+            Object row[] = new Object[5];
+            row[0] = orderitem.getProduct().getId();
+            row[1] = orderitem.getProduct().getName();
+            row[2] = orderitem.getProduct().getCategory();
+            row[3] = orderitem.getProduct().getPrice(); 
+            row[4] = orderitem.getQuantity();
+            model.addRow(row);
+        }     
+    }
 }

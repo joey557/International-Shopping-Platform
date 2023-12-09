@@ -92,7 +92,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Operation", "Accountant" }));
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Operation", "Accountant", "Customer Service" }));
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {

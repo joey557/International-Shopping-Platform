@@ -4,6 +4,13 @@
  */
 package UserInterface.EcommerceSales;
 
+import Business.Business;
+import Business.Order.Order;
+import Business.Order.OrderItem;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joey
@@ -13,8 +20,17 @@ public class OrderStatusJPanel extends javax.swing.JPanel {
     /**
      * Creates new form OrderStatusJPanel
      */
-    public OrderStatusJPanel() {
+    UserAccount ua;
+    Business business;
+    JPanel CardSequencePanel;
+    
+    OrderStatusJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ua = ua;
+        this.business = business;
+        this.CardSequencePanel = CardSequencePanel;
+        
+        populateTable();
     }
 
     /**
@@ -29,21 +45,29 @@ public class OrderStatusJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "OrderID", "Order Date", "TotalAmount", "Status"
+                "OrderID", "TotalAmount", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblOrder);
 
         jLabel1.setText("View Order");
+
+        jButton1.setText("<< Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,7 +80,9 @@ public class OrderStatusJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -66,14 +92,38 @@ public class OrderStatusJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(jButton1)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EcommerceSalesMenuJPanel ecommercesalesarea = new EcommerceSalesMenuJPanel(ua, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("EcommerceSalesMenuJPanel", ecommercesalesarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrder;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+        model.setRowCount(0);
+
+        for (Order order: ua.getMasterorderlist().getOrderList()) {
+            Object row[] = new Object[3];
+            row[0] = order.getId();
+            row[1] = order.Totalamount();
+            row[2] = order.getStatus(); 
+            model.addRow(row);
+        }
+    }
 }

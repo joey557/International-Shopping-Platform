@@ -8,7 +8,11 @@ import Business.Business;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Order.Order;
+import Business.Order.OrderItem;
+import Business.Product.Product;
 import Business.UserAccount.UserAccount;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +37,6 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
         this.CardSequencePanel = CardSequencePanel;
         
         this.currentOrder = new Order();
-        populateCombo();
         populateProductTable();
         populateCartTable();
         
@@ -48,30 +51,24 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cmbSaler = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCarts = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtQuan = new javax.swing.JTextField();
         btnAddCart = new javax.swing.JButton();
         txtModQuan = new javax.swing.JTextField();
         btnRemove = new javax.swing.JButton();
         btnCheckout = new javax.swing.JButton();
         btnModify = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
+        spnQuantity = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-
-        cmbSaler.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSalerActionPerformed(evt);
-            }
-        });
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,8 +82,6 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tblProduct);
-
-        jLabel2.setText("Wholesaler:");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("View Goods from Wholesaler");
@@ -111,58 +106,98 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
         jLabel6.setText("Quantity:");
 
         btnAddCart.setText("Add to Cart");
+        btnAddCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCartActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
+        btnCheckout.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         btnCheckout.setText("CheckOut");
+        btnCheckout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckoutActionPerformed(evt);
+            }
+        });
 
         btnModify.setText("Modify Quantity:");
+        btnModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModifyActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setBackground(new java.awt.Color(0, 0, 0));
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(204, 0, 0));
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTitle.setText("Have a wonderful shopping experience!");
+        lblTitle.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        lblTitle.setIconTextGap(20);
+
+        spnQuantity.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        jButton1.setText("<< Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel4))
+                            .addComponent(jButton1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(cmbSaler, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(txtQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnModify)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtModQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(btnRemove)
-                                                .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnModify)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtModQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(11, 11, 11))
-                                    .addComponent(btnAddCart, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel3)
-                        .addGap(326, 326, 326)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                            .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnRemove))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnAddCart)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel3)
+                .addGap(36, 36, 36)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,28 +206,23 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(txtQuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)))
+                        .addGap(104, 104, 104)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnAddCart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(64, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbSaler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(9, 9, 9)
+                            .addComponent(jLabel3)
+                            .addComponent(lblTitle))
+                        .addGap(44, 44, 44)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +233,9 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnRemove)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,9 +243,137 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbSalerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSalerActionPerformed
+    private void btnAddCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCartActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbSalerActionPerformed
+        int selectedRowIndex = tblProduct.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select the product first");
+            return;
+        }
+        
+        Product product = (Product) tblProduct.getValueAt(selectedRowIndex,0);
+        int quant = 0;
+        
+        try {
+            
+            quant = (Integer) spnQuantity.getValue();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Please check the quantity fields.");
+            return;
+            
+        }
+        
+        OrderItem item = currentOrder.findProduct(product);
+        
+        if (item == null) {
+           
+            if (product.getAvail() >= quant) {
+                
+                currentOrder.addNewOrderItem(product, quant);
+                product.setAvail(product.getAvail() - quant);
+                
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Please check product availability.");
+                return;
+            }
+            
+        } else {
+            
+            int oldQuant = item.getQuantity();
+            if (item.getProduct().getAvail() + oldQuant < quant) {
+                JOptionPane.showMessageDialog(this, "Please check product availability.");
+                return;
+            }
+            
+            item.getProduct().setAvail(item.getProduct().getAvail()+oldQuant-quant);
+            item.setQuantity(quant);
+                  
+        }
+        
+        populateProductTable();
+        populateCartTable();
+    }//GEN-LAST:event_btnAddCartActionPerformed
+
+    private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblCarts.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select the order item first.");
+            return;
+        }
+        
+        OrderItem item = (OrderItem) tblCarts.getValueAt(selectedRowIndex, 0);
+        int quant = 0;
+        
+        try {
+            
+            quant = Integer.parseInt(txtModQuan.getText());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Please check the modified quantity field.");
+            return;
+            
+        }
+        
+        int oldQuant = item.getQuantity();
+        if (item.getProduct().getAvail() + oldQuant < quant) {
+                JOptionPane.showMessageDialog(this, "Please check product availability.");
+                return;
+        }
+            
+        item.getProduct().setAvail(item.getProduct().getAvail() + oldQuant - quant);
+        item.setQuantity(quant);
+        
+        populateCartTable();
+        populateProductTable();
+    }//GEN-LAST:event_btnModifyActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblCarts.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select the order item first.");
+            return;
+        }
+        
+        OrderItem item = (OrderItem) tblCarts.getValueAt(selectedRowIndex, 0);
+        int quant = 0;
+            
+        item.getProduct().setAvail(item.getProduct().getAvail() + item.getQuantity());
+        currentOrder.deleteItem(item);
+        
+        populateCartTable();
+        populateProductTable();
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
+        // TODO add your handling code here:
+        currentOrder.setStatus("Processing");
+        // TODO
+        //currentOrder.setCustomer("");
+        
+        ua.getMasterorderlist().addNewOrder(currentOrder);
+        currentOrder = new Order();
+        
+        populateProductTable();
+        populateCartTable();
+        
+        txtModQuan.setText("");
+        spnQuantity.setValue(0);
+        
+        JOptionPane.showMessageDialog(this, "Thank you for your purchase. Looking forward to see you again!");
+    }//GEN-LAST:event_btnCheckoutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EcommerceSalesMenuJPanel ecommercesalesarea = new EcommerceSalesMenuJPanel(ua, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("EcommerceSalesMenuJPanel", ecommercesalesarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -221,52 +381,57 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCheckout;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JComboBox<String> cmbSaler;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JSpinner spnQuantity;
     private javax.swing.JTable tblCarts;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtModQuan;
-    private javax.swing.JTextField txtQuan;
     // End of variables declaration//GEN-END:variables
 
-    private void populateCombo() {
-        cmbSaler.removeAllItems();
-        
-        for (Enterprise ep : business.getEnterpriselist().getEnterpriselist()){
-            cmbSaler.addItem(ep);
-        }
-    }
+    
 
     private void populateProductTable() {
-        Enterprise selectedEnterprise = (Enterprise) cmbSaler.getSelectedItem();
         
-        if (selectedEnterprise ==null){
-            return;
-        }
         
         DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
         model.setRowCount(0);
 
-        for (Product p : selectedSupplier.getProductCatalog().getProductcatalog()) {
+        for (Product p : business.getWholesalerproductlist().getProductDirectory()) {
  
             Object row[] = new Object[4];
-            row[0] = p;
-            row[1] = p.getModelNumber();
-            row[2] = p.getPrice();
-            row[3] = p.getAvail();
+            row[0] = p.getId();
+            row[1] = p.getName();
+            row[2] = p.getCategory();
+            row[3] = p.getPrice();
+            row[4] = p.getDescription();
+            row[5] = p.getQuantity();
             model.addRow(row);
          
         }
     }
 
     private void populateCartTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblCarts.getModel();
+        model.setRowCount(0);
+
+        for (OrderItem oi : currentOrder.getOrderItemList()) {
+            Object row[] = new Object[4];
+            row[0] = oi;
+            row[1] = oi.getProduct().getPrice();
+            row[2] = oi.getQuantity();
+            row[3] = oi.getQuantity() * oi.getProduct().getPrice(); 
+            model.addRow(row);
+        }
+        
 
     }
 }
