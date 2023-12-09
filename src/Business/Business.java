@@ -6,7 +6,8 @@ package Business;
 
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
-import Business.Order.OrderDirectory;
+import Business.Order.MasterOrderList;
+import Business.Order.Order;
 import Business.Product.ProductDirectory;
 import Business.UserAccount.UserAccountDirectory;
 
@@ -21,7 +22,7 @@ public class Business {
     EnterpriseDirectory enterpriselist;
     ProductDirectory wholesalerproductlist;
     ProductDirectory ecommerceproductlist;
-    OrderDirectory orderlist;
+    MasterOrderList orderlist;
     UserAccountDirectory useracclist;
 
     public Business(String n) {
@@ -31,7 +32,7 @@ public class Business {
         enterpriselist = new EnterpriseDirectory();
         wholesalerproductlist = new ProductDirectory();
         ecommerceproductlist = new ProductDirectory();
-        orderlist = new OrderDirectory();
+        orderlist = new MasterOrderList();
         useracclist = new UserAccountDirectory();
 
     }
@@ -53,7 +54,7 @@ public class Business {
         return ecommerceproductlist;
     }
 
-    public OrderDirectory getOrderlist() {
+    public MasterOrderList getOrderlist() {
         return orderlist;
     }
 
