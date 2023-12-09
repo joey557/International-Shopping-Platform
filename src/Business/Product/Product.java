@@ -18,6 +18,7 @@ public class Product {
     private int id;
     private int quantity;
     private int soldQuantity;
+    private int avail;
     private String description;
     private static int count = 1;
     
@@ -82,6 +83,12 @@ public class Product {
         this.description = description;
     }
 
+    public int getAvail() {
+        return avail;
+    }
 
+    public void setAvail(int avail) {
+        this.avail = avail;
+    }
     
 }
