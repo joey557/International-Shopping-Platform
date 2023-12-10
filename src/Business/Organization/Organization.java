@@ -18,13 +18,13 @@ public class Organization {
     private UserAccountDirectory acclist;
     private WorkQueue workqueue;
     
-//    Organization(String orgname) {
-//        
-//        this.name = orgname;
-//        this.acclist = new UserAccountDirectory();
-//        this.workqueue = new WorkQueue();
-//        
-//    }
+    public Organization(String orgname) {
+        
+        this.name = orgname;
+        this.acclist = new UserAccountDirectory();
+        this.workqueue = new WorkQueue();
+        
+    }
     
     public String getName() {
         return name;
