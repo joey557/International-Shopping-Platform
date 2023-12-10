@@ -21,6 +21,7 @@ public class Product {
     private int avail;
     private String description;
     private static int count = 1;
+    private int sellPrice;
     
     public Product() {
         id = count;
@@ -89,6 +90,19 @@ public class Product {
 
     public void setAvail(int avail) {
         this.avail = avail;
+    }
+
+    public int getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(int sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
     
 }
