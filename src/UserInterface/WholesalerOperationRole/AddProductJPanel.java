@@ -7,7 +7,6 @@ package UserInterface.WholesalerOperationRole;
 import Business.Business;
 import Business.Product.Product;
 import Business.Product.ProductDirectory;
-import UserInterface.AccountingRole.AccountingMenuJPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -199,6 +198,7 @@ public class AddProductJPanel extends javax.swing.JPanel {
         newproduct.setPrice(price);
         newproduct.setQuantity(quantity);
         newproduct.setDescription(description);
+        newproduct.setAvail(quantity);
 
         JOptionPane.showMessageDialog(this, "New product added");
     }//GEN-LAST:event_btnAddActionPerformed

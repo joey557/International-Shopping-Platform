@@ -167,10 +167,13 @@
             <StringItem index="0" value="Sales"/>
             <StringItem index="1" value="Operation"/>
             <StringItem index="2" value="Accountant"/>
-            <StringItem index="3" value="Customer Service"/>
+            <StringItem index="3" value="ContactTeam"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboRoleActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -192,9 +195,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
-            <StringItem index="0" value="Marketing"/>
+            <StringItem index="0" value="Operation"/>
             <StringItem index="1" value="Sales"/>
-            <StringItem index="2" value="Customer Service"/>
+            <StringItem index="2" value="Contact Team"/>
             <StringItem index="3" value="Accounting"/>
             <StringItem index="4" value=" "/>
           </StringArray>

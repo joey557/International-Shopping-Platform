@@ -27,7 +27,6 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
         this.business = business;
         
         populateTable();
-        populateProductDetails();
 
     }
 
@@ -54,7 +53,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProduct = new javax.swing.JTable();
+        tblProducts = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         comboCategory = new javax.swing.JComboBox<>();
@@ -109,7 +108,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        tblProduct.setModel(new javax.swing.table.DefaultTableModel(
+        tblProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -120,7 +119,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
                 "ProductID", "Name", "Category", "Price", "Quantity", "Description"
             }
         ));
-        jScrollPane2.setViewportView(tblProduct);
+        jScrollPane2.setViewportView(tblProducts);
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -165,9 +164,9 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 189, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,13 +227,28 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        Product product = business.getWholesalerproductlist().searchProduct(txtName.getText());
+//        System.out.print(txtName.getText());
+//        String name = txtName.getText();
+//        System.out.print(business.getWholesalerproductlist().getProductDirectory().size());
+//        Product product = business.getWholesalerproductlist().searchProduct(name);
+//        System.out.print(name);
+//        System.out.print(product);
+        
+        int selectedRowIndex = tblProducts.getSelectedRow();
+       
+        
+        Object value = tblProducts.getValueAt(selectedRowIndex, 1);
+        Product product = business.getWholesalerproductlist().searchProduct(value.toString());
+
+
+
         product.setCategory(comboCategory.getSelectedItem().toString());
         product.setPrice(Integer.parseInt(txtPrice.getText()));
         product.setQuantity(Integer.parseInt(txtQuantity.getText()));
         product.setDescription(txtDescription.getText());
         
         JOptionPane.showMessageDialog(null, "Product updated successfully");
+        populateTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -251,14 +265,15 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        int selectedRow = tblProduct.getSelectedRow();
+        int selectedRow = tblProducts.getSelectedRow();
         if (selectedRow >= 0) {
 
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete the product?", "Warning", dialogButton);
             if (dialogResult == JOptionPane.YES_NO_OPTION) {
-                Product product = (Product) tblProduct.getValueAt(selectedRow, 0);
-                business.getWholesalerproductlist().removeProduct(product);
+                Object value = tblProducts.getValueAt(selectedRow, 1);
+                Product selectedProduct = business.getWholesalerproductlist().searchProduct(value.toString());
+                business.getWholesalerproductlist().removeProduct(selectedProduct);
                 populateTable();
             }
         } else {
@@ -270,7 +285,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = tblProduct.getSelectedRow();
+        int selectedRowIndex = tblProducts.getSelectedRow();
         
         if (selectedRowIndex<0) {
         
@@ -278,8 +293,12 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
             return;
         }
         
-        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
-        Product selectedProduct = (Product) model.getValueAt(selectedRowIndex, 0);
+        Object value = tblProducts.getValueAt(selectedRowIndex, 1);
+        Product selectedProduct = business.getWholesalerproductlist().searchProduct(value.toString());
+
+        
+//        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+//        Product selectedProduct = (Product) model.getValueAt(selectedRowIndex, 0);
         
         txtName.setText(String.valueOf(selectedProduct.getName()));
         comboCategory.setSelectedItem(String.valueOf(selectedProduct.getCategory()));
@@ -303,7 +322,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblProduct;
+    private javax.swing.JTable tblProducts;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
@@ -311,7 +330,7 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         model.setRowCount(0);
         
         for (Product p : business.getWholesalerproductlist().getProductDirectory()) {
@@ -326,7 +345,4 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
         }   
     }
 
-    private void populateProductDetails() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

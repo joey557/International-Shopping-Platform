@@ -188,7 +188,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
         
         txtName.setText("");
-        Label.setText("");
+        txtID.setText("");
         populateTable();
         
         

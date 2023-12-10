@@ -92,7 +92,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Operation", "Accountant", "Customer Service" }));
+        comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sales", "Operation", "Accountant", "ContactTeam" }));
+        comboRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboRoleActionPerformed(evt);
+            }
+        });
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +108,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Organization:");
 
-        comboOrganization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Marketing", "Sales", "Customer Service", "Accounting", " " }));
+        comboOrganization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operation", "Sales", "Contact Team", "Accounting", " " }));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +228,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             UserAccountDirectory epacclist = ep.getEeacclist();
             epacclist.createUser(username, password, ee, newrole);
         } else {
-            Organization org = new Organization();
+            Organization org = new Organization(orgtype);
             org.setName(orgtype);
             UserAccountDirectory useracclist = new UserAccountDirectory();
             useracclist.createUser(username, password, ee, newrole);
@@ -239,6 +244,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void comboRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboRoleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
