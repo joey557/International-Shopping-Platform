@@ -39,6 +39,7 @@ public class SystemAdminMenuJPanel extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jButton1.setText("Manage Enterprise");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +55,13 @@ public class SystemAdminMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setText("View Performance Data");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,6 +69,7 @@ public class SystemAdminMenuJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(167, 167, 167)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(413, Short.MAX_VALUE))
@@ -72,7 +81,9 @@ public class SystemAdminMenuJPanel extends javax.swing.JPanel {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(217, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -92,9 +103,18 @@ public class SystemAdminMenuJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ViewPerformanceDataJPanel viewperformancedata = new ViewPerformanceDataJPanel(business, userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("ViewPerformanceDataJPanel", viewperformancedata);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     // End of variables declaration//GEN-END:variables
 }

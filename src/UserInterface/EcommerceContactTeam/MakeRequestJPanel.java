@@ -5,7 +5,10 @@
 package UserInterface.EcommerceContactTeam;
 
 import Business.Business;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
 import Business.Order.Order;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.OrderWorkRequest;
 import javax.swing.JOptionPane;
@@ -145,7 +148,22 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
         request.setSender(ua);
         request.setStatus("Sent");
         
-        
+        EnterpriseDirectory eplist = business.getEnterpriselist();
+        for (Enterprise ep : eplist.getEnterpriselist()) {
+            if (ep.getEnterpriseType().equals("Wholesaler")) {
+                Organization org = null;
+                for (Organization organization : ep.getOrganizationDirectory().getOrganizationlist()) {
+                    if (organization.getName().equals("Customer Service")) {
+                        org = organization;
+                        break;
+                    }
+                }
+                if (org!=null){
+                org.getWorkqueue().getWorkreqlist().add(request);
+                ua.getWorkQueue().getWorkreqlist().add(request);
+//        }
+            }
+        }
 //        Organization org = null;
 //        for (Organization organization : business.getOrganizationDirectory().getOrganizationList()){
 //            if (organization instanceof LabOrganization){
@@ -160,7 +178,7 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(null, "Request message sent");
         txtMessage.setText("");
-        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

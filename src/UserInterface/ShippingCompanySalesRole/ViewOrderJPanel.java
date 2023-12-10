@@ -4,6 +4,15 @@
  */
 package UserInterface.ShippingCompanySalesRole;
 
+import Business.Business;
+import Business.Order.Order;
+import Business.Order.OrderItem;
+import UserInterface.WholesalerSalesRole.OrderDetailJPanel;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joey
@@ -13,8 +22,15 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PackageJPanel
      */
-    public ViewOrderJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    public ViewOrderJPanel(Business business, JPanel userProcessContainer) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.business = business;
+        
+        populateTable();
+
     }
 
     /**
@@ -28,7 +44,6 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
 
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnBack1 = new javax.swing.JButton();
         btnDetail = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
@@ -41,8 +56,6 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack1.setText("<<Back");
-
         btnDetail.setText("Ship");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,18 +65,18 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "OrderID", "Customer", "Destination", "Status"
+                "OrderID", "Customer", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblOrder);
 
-        jLabel1.setText("OrderID");
+        jLabel1.setText("OrderID:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,22 +85,17 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addGap(281, 281, 281))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnBack1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(btnDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(332, 332, 332))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,25 +107,46 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(btnDetail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack1)
-                .addGap(132, 132, 132))
+                .addComponent(btnDetail)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+        model.setRowCount(0);
+        String keyword = txtSearch.getText();
+        
+        for (Order order: business.getOrderlist().getOrderList()){
+            if (Integer.toString(order.getId()).equals(keyword)){
+                Object row[] = new Object[3];
+                row[0] = order.getId();
+                row[1] = order.getCustomer();
+                row[2] = order.getStatus(); 
+                model.addRow(row);
+                }
+            }
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblOrder.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row from table first to send the order.", "Warning", JOptionPane.WARNING_MESSAGE);
+
+        }
+        else {
+            Order selectedorder = (Order)tblOrder.getValueAt(selectedRow, 0);
+            selectedorder.setStatus("Shipped");
+            JOptionPane.showMessageDialog(this, "Order shipped successfully.");
+        }
     }//GEN-LAST:event_btnDetailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
@@ -125,4 +154,21 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblOrder;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+        model.setRowCount(0);
+
+        for (Order order: business.getOrderlist().getOrderList()) {
+            int count = 0;
+            for (OrderItem orderitem : order.getOrderItemList()) {
+                count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
+            }
+            Object row[] = new Object[3];
+            row[0] = order.getId();
+            row[1] = order.getCustomer();
+            row[2] = order.getStatus(); 
+            model.addRow(row);
+        }     
+    }
 }

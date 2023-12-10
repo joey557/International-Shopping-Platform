@@ -78,10 +78,13 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ProductID", "Name", "Category", "Price", "Description", "Avail"
+                "Name", "ProductID", "Category", "Price", "Description", "Avail"
             }
         ));
         jScrollPane1.setViewportView(tblProduct);
+        if (tblProduct.getColumnModel().getColumnCount() > 0) {
+            tblProduct.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("View Goods from Wholesaler");
@@ -96,7 +99,7 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ProductID", "Name", "Quantity", "TotalAmount"
+                "Name", "ProductID", "Quantity", "TotalAmount"
             }
         ));
         jScrollPane2.setViewportView(tblCarts);
@@ -251,7 +254,8 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
             return;
         }
         
-        Product product = (Product) tblProduct.getValueAt(selectedRowIndex,0);
+        Product product = (Product) tblProduct.getValueAt(selectedRowIndex, 0);
+        
         int quant = 0;
         
         try {
@@ -305,6 +309,9 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
         }
         
         OrderItem item = (OrderItem) tblCarts.getValueAt(selectedRowIndex, 0);
+//        Object value = tblCarts.getValueAt(selectedRowIndex, 1);
+//        OrderItem item = business.getWholesalerproductlist().searchProduct(value.toString());
+        
         int quant = 0;
         
         try {
@@ -406,9 +413,9 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
 
         for (Product p : business.getWholesalerproductlist().getProductDirectory()) {
  
-            Object row[] = new Object[4];
-            row[0] = p.getId();
-            row[1] = p.getName();
+            Object row[] = new Object[6];
+            row[0] = p;
+            row[1] = p.getId();
             row[2] = p.getCategory();
             row[3] = p.getPrice();
             row[4] = p.getDescription();
@@ -426,7 +433,7 @@ public class OrderGoodsJPanel extends javax.swing.JPanel {
         for (OrderItem oi : currentOrder.getOrderItemList()) {
             Object row[] = new Object[4];
             row[0] = oi;
-            row[1] = oi.getProduct().getPrice();
+            row[1] = oi.getProduct().getId();
             row[2] = oi.getQuantity();
             row[3] = oi.getQuantity() * oi.getProduct().getPrice(); 
             model.addRow(row);

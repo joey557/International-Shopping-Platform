@@ -22,7 +22,7 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
     Business business;
     JPanel CardSequencePanel;
     
-    EcommerceSalesMenuJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
+    public EcommerceSalesMenuJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
         this.ua = ua;
         this.business = business;

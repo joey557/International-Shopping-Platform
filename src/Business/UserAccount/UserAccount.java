@@ -6,8 +6,10 @@ package Business.UserAccount;
 
 import Business.Employee.Employee;
 import Business.Order.MasterOrderList;
+import Business.Order.Order;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +24,7 @@ public class UserAccount {
     private MasterOrderList masterorderlist;
     private WorkQueue workQueue;
 
+    
     public MasterOrderList getMasterorderlist() {
         return masterorderlist;
     }
@@ -72,6 +75,7 @@ public class UserAccount {
     
     public UserAccount() {
         workQueue = new WorkQueue();
+        masterorderlist = new MasterOrderList();
     }
      
 }

@@ -5,8 +5,13 @@
 package UserInterface.EcommerceContactTeam;
 
 import Business.Business;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -127,6 +132,35 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+
+        model.setRowCount(0);
         
+        EnterpriseDirectory eplist = business.getEnterpriselist();
+        for (Enterprise ep : eplist.getEnterpriselist()) {
+            if (ep.getEnterpriseType().equals("Wholesaler")) {
+                Organization org = null;
+                for (Organization organization : ep.getOrganizationDirectory().getOrganizationlist()) {
+                    if (organization.getName().equals("ContactTeam")) {
+                        org = organization;
+                        break;
+                    }
+                }
+                if (org != null) {
+                    for (WorkRequest request : org.getWorkqueue().getWorkreqlist()) {
+                        Object[] row = new Object[4];
+                        row[0] = request;
+                        row[1] = request.getSender().getEmployee().getName();
+                        row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+                        row[3] = request.getStatus();
+
+                        model.addRow(row);
+                    }    
+                }
+               
+            }
+        }
+        
+         
     }
 }
