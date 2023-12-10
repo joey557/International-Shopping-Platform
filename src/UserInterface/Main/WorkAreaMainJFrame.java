@@ -7,8 +7,20 @@ package UserInterface.Main;
 import Business.Business;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
+import UserInterface.AccountingRole.ViewRevenueReportJPanel;
 import UserInterface.AdminRole.AdminMenuJPanel;
+import UserInterface.EcommerceContactTeam.EcoCTMenuJPanel;
+import UserInterface.EcommerceOperation.EcoViewProductJPanel;
+import UserInterface.EcommerceSales.EcommerceSalesMenuJPanel;
+import UserInterface.ShippingCompanySalesRole.ViewOrderJPanel;
 import UserInterface.SystemAdminRole.SystemAdminMenuJPanel;
+import UserInterface.WholesalerOperationRole.WholesalerOperationMenuJPanel;
+import UserInterface.WholesalerSalesRole.ManageOrderJPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -138,7 +150,14 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
         String un = txtUsername.getText();
         String pw = txtPassword.getText();
         
+        
         EnterpriseDirectory eplist = business.getEnterpriselist();
+        boolean isUserFound = false;
+//        OrganizationDirectory orgDir = enterprise.getOrganizationDirectory();
+        
+       
+        
+        
         
         
         if (eplist.findAccount(un, pw)!=null) {
@@ -152,7 +171,79 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
             CardSequencePanel.removeAll();
             CardSequencePanel.add("SystemAdminMenuJPanel", systemadminworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        }
+        } else {
+       
+            for (Enterprise enterprise : eplist.getEnterpriselist()) {
+                for (Organization org : enterprise.getOrganizationDirectory().getOrganizationlist()) {
+                    UserAccountDirectory uad = org.getAcclist();
+                    UserAccount userAccount = uad.validateUser(un, pw);
+
+                    if (userAccount != null) {
+                        String roleType = userAccount.getRole().getType();
+                        String enterpriseType = enterprise.getEnterpriseType();
+
+                        if (enterpriseType.equals("E-commerce platform") && roleType.equals("Operation")) {
+                            EcoViewProductJPanel ecooperworkarea = new EcoViewProductJPanel(business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("EcoViewProductJPanel", ecooperworkarea);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        } else if (enterpriseType.equals("Wholesaler") && roleType.equals("Operation")) {
+                            WholesalerOperationMenuJPanel wholeoperworkarea = new WholesalerOperationMenuJPanel(business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("WholesalerOperationMenuJPanel", wholeoperworkarea);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        } else if (enterpriseType.equals("Wholesaler") && roleType.equals("Sales")) {
+                            ManageOrderJPanel manageorder = new ManageOrderJPanel(business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("ManageOrderJPanel", manageorder);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        } else if (enterpriseType.equals("E-commerce platform") && roleType.equals("Sales")) {
+                            EcommerceSalesMenuJPanel manageorder = new EcommerceSalesMenuJPanel( userAccount, business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("EcommerceSalesMenuJPanel", manageorder);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                            
+                        } else if (enterpriseType.equals("Shipping and Delivery Company") && roleType.equals("Sales")) {
+                            ViewOrderJPanel vieworder = new ViewOrderJPanel( business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("ViewOrderJPanel", vieworder);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        } else if (enterpriseType.equals("E-commerce platform") && roleType.equals("ContactTeam")) {
+                            EcoCTMenuJPanel ecomenu = new EcoCTMenuJPanel( userAccount, business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("EcoCTMenuJPanel", ecomenu);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        }else if (enterpriseType.equals("Wholesaler") && roleType.equals("Accountant")) {
+                            ViewRevenueReportJPanel acct = new ViewRevenueReportJPanel( userAccount, business, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("ViewRevenueReportJPanel", acct);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;
+                        // Add more conditions for other enterprise types and roles
+                    }
+                }
+                if (isUserFound) {
+                    JOptionPane.showMessageDialog(this, "Invalid username, password, or user not found.");
+                    break;
+                }
+            }
+    }
+
+   
+
         
 //        else if (professorlist.findPerson(un, pw)!=null) {
 //            Professor user = professorlist.findPerson(un,pw);
@@ -181,7 +272,7 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
 //        }
         txtUsername.setText("");
         txtPassword.setText("");
-        
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

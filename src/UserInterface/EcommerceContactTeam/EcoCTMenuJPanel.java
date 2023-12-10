@@ -21,7 +21,7 @@ public class EcoCTMenuJPanel extends javax.swing.JPanel {
     Business business;
     JPanel CardSequencePanel;
     
-    EcoCTMenuJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
+    public EcoCTMenuJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
         this.ua = ua;
         this.business = business;
