@@ -15,9 +15,11 @@ import UserInterface.AccountingRole.ViewRevenueReportJPanel;
 import UserInterface.AdminRole.AdminMenuJPanel;
 import UserInterface.EcommerceContactTeam.EcoCTMenuJPanel;
 import UserInterface.EcommerceOperation.EcoViewProductJPanel;
+import UserInterface.EcommerceOperation.EcommerceOperationMenuJPanel;
 import UserInterface.EcommerceSales.EcommerceSalesMenuJPanel;
 import UserInterface.ShippingCompanySalesRole.ViewOrderJPanel;
 import UserInterface.SystemAdminRole.SystemAdminMenuJPanel;
+import UserInterface.WholesalerCustomerServiceRole.CustomerServiceMenuJPanel;
 import UserInterface.WholesalerOperationRole.WholesalerOperationMenuJPanel;
 import UserInterface.WholesalerSalesRole.ManageOrderJPanel;
 import javax.swing.JOptionPane;
@@ -166,11 +168,13 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
             CardSequencePanel.removeAll();
             CardSequencePanel.add("AdminMenuJPanel", adminworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+            isUserFound = true;
         } else if (un.equals("admin") && pw.equals("XXXX")) {
             SystemAdminMenuJPanel systemadminworkarea = new SystemAdminMenuJPanel(business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("SystemAdminMenuJPanel", systemadminworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+            isUserFound = true;
         } else {
        
             for (Enterprise enterprise : eplist.getEnterpriselist()) {
@@ -183,9 +187,9 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
                         String enterpriseType = enterprise.getEnterpriseType();
 
                         if (enterpriseType.equals("E-commerce platform") && roleType.equals("Operation")) {
-                            EcoViewProductJPanel ecooperworkarea = new EcoViewProductJPanel(business, CardSequencePanel);
+                            EcommerceOperationMenuJPanel ecommeroperation = new EcommerceOperationMenuJPanel(enterprise, business, CardSequencePanel);
                             CardSequencePanel.removeAll();
-                            CardSequencePanel.add("EcoViewProductJPanel", ecooperworkarea);
+                            CardSequencePanel.add("EcommerceOperationMenuJPanel", ecommeroperation);
                             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
                             isUserFound = true;
                             break;
@@ -204,7 +208,7 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
                             isUserFound = true;
                             break;
                         } else if (enterpriseType.equals("E-commerce platform") && roleType.equals("Sales")) {
-                            EcommerceSalesMenuJPanel manageorder = new EcommerceSalesMenuJPanel( userAccount, business, CardSequencePanel);
+                            EcommerceSalesMenuJPanel manageorder = new EcommerceSalesMenuJPanel(enterprise, userAccount, business, CardSequencePanel);
                             CardSequencePanel.removeAll();
                             CardSequencePanel.add("EcommerceSalesMenuJPanel", manageorder);
                             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -219,12 +223,21 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
                             isUserFound = true;
                             break;
                         } else if (enterpriseType.equals("E-commerce platform") && roleType.equals("ContactTeam")) {
-                            EcoCTMenuJPanel ecomenu = new EcoCTMenuJPanel( userAccount, business, CardSequencePanel);
+                            EcoCTMenuJPanel ecomenu = new EcoCTMenuJPanel(enterprise, userAccount, business, CardSequencePanel);
                             CardSequencePanel.removeAll();
                             CardSequencePanel.add("EcoCTMenuJPanel", ecomenu);
                             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
                             isUserFound = true;
                             break;
+                        } else if (enterpriseType.equals("Wholesaler") && roleType.equals("ContactTeam")) {
+                            CustomerServiceMenuJPanel servicemenu = new CustomerServiceMenuJPanel(enterprise, userAccount, business, org, CardSequencePanel);
+                            CardSequencePanel.removeAll();
+                            CardSequencePanel.add("CustomerServiceMenuJPanel", servicemenu);
+                            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                            isUserFound = true;
+                            break;  
+                            
+                      
                         }else if (enterpriseType.equals("Wholesaler") && roleType.equals("Accountant")) {
                             ViewRevenueReportJPanel acct = new ViewRevenueReportJPanel( userAccount, business, CardSequencePanel);
                             CardSequencePanel.removeAll();
@@ -233,50 +246,30 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
                             isUserFound = true;
                             break;
                         // Add more conditions for other enterprise types and roles
+                        }   
                     }
-                }
-                if (isUserFound) {
-                    JOptionPane.showMessageDialog(this, "Invalid username, password, or user not found.");
-                    break;
+                
                 }
             }
-    }
+        if (!isUserFound) {
+             JOptionPane.showMessageDialog(this, "Invalid username, password, or user not found.");
+        }
 
-   
-
-        
-//        else if (professorlist.findPerson(un, pw)!=null) {
-//            Professor user = professorlist.findPerson(un,pw);
-//            ProfessorMenuJPanel professorworkarea = new ProfessorMenuJPanel(user, studentlist, professorlist, courselist, CardSequencePanel);
-//            CardSequencePanel.removeAll();
-//            CardSequencePanel.add("ProfessorMenuJPanel", professorworkarea);
-//            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-//        }
-//        else if (un.equals("admin") && pw.equals("XXXX")){
-//            AdminhomeJPanel adminworkarea = new AdminhomeJPanel(studentlist, professorlist, courselist, CardSequencePanel);
-//            CardSequencePanel.removeAll();
-//            CardSequencePanel.add("AdminhomeJPanel", adminworkarea);
-//            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-//        }    
-//        else if (employerlist.findPerson(un, pw)!=null) {
-//            Employer user = employerlist.findPerson(un,pw);
-//            EmployerJPanel employerworkarea = new EmployerJPanel(user,  employerdirectory,studentlist,  jobpost, CardSequencePanel );
-//            CardSequencePanel.removeAll();
-//            CardSequencePanel.add("EmployerJPanel", employerworkarea);
-//            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);  
-//            
-//            
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(this, "Invalid Login.");
-//        }
         txtUsername.setText("");
         txtPassword.setText("");
         }
+
+  
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
+        LogoutJPanel logoutworkarea = new LogoutJPanel(business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("LogoutJPanel", logoutworkarea);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+        
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

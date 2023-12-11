@@ -5,6 +5,7 @@
 package UserInterface.EcommerceSales;
 
 import Business.Business;
+import Business.Enterprise.Enterprise;
 import Business.Order.Order;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -20,10 +21,12 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
      */
     UserAccount ua;
     Business business;
+    Enterprise ep;
     JPanel CardSequencePanel;
     
-    public EcommerceSalesMenuJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
+    public EcommerceSalesMenuJPanel(Enterprise ep, UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
         this.ua = ua;
         this.business = business;
         this.CardSequencePanel = CardSequencePanel;
@@ -41,6 +44,7 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
 
         btnOrdergoods = new javax.swing.JButton();
         btnOrderstatus = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         btnOrdergoods.setText("Order Goods");
         btnOrdergoods.addActionListener(new java.awt.event.ActionListener() {
@@ -56,31 +60,41 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("E-commerce Sales' Work Area");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnOrdergoods, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(105, 105, 105)
                 .addComponent(btnOrderstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
+                .addGap(77, 77, 77)
+                .addComponent(lblTitle)
+                .addGap(163, 163, 163)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrdergoods, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOrderstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrdergoodsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdergoodsActionPerformed
         // TODO add your handling code here:
-        OrderGoodsJPanel ordergoodsarea = new OrderGoodsJPanel(ua, business, CardSequencePanel);
+        OrderGoodsJPanel ordergoodsarea = new OrderGoodsJPanel(ep, ua, business, CardSequencePanel);
         CardSequencePanel.removeAll();
         CardSequencePanel.add("OrderGoodsJPanel", ordergoodsarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -88,7 +102,7 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
 
     private void btnOrderstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderstatusActionPerformed
         // TODO add your handling code here:
-        OrderStatusJPanel orderstatusarea = new OrderStatusJPanel(ua, business, CardSequencePanel);
+        OrderStatusJPanel orderstatusarea = new OrderStatusJPanel(ep, ua, business, CardSequencePanel);
         CardSequencePanel.removeAll();
         CardSequencePanel.add("OrderStatusJPanel", orderstatusarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -98,5 +112,6 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOrdergoods;
     private javax.swing.JButton btnOrderstatus;
+    private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }

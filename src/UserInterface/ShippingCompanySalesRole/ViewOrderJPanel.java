@@ -48,6 +48,7 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -71,45 +72,54 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "OrderID", "Customer", "Status"
+                "Customer", "OrderID", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblOrder);
 
         jLabel1.setText("OrderID:");
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("View Order");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDetail)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(104, 104, 104))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,8 +132,8 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         for (Order order: business.getOrderlist().getOrderList()){
             if (Integer.toString(order.getId()).equals(keyword)){
                 Object row[] = new Object[3];
-                row[0] = order.getId();
-                row[1] = order.getCustomer();
+                row[0] = order;
+                row[1] = order.getId();
                 row[2] = order.getStatus(); 
                 model.addRow(row);
                 }
@@ -142,6 +152,8 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
             Order selectedorder = (Order)tblOrder.getValueAt(selectedRow, 0);
             selectedorder.setStatus("Shipped");
             JOptionPane.showMessageDialog(this, "Order shipped successfully.");
+            populateTable();
+
         }
     }//GEN-LAST:event_btnDetailActionPerformed
 
@@ -151,6 +163,7 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -160,15 +173,17 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Order order: business.getOrderlist().getOrderList()) {
-            int count = 0;
-            for (OrderItem orderitem : order.getOrderItemList()) {
-                count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
+            if (order.getStatus().equals("Send for delivery")) {
+                int count = 0;
+                for (OrderItem orderitem : order.getOrderItemList()) {
+                    count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
+                }
+                Object row[] = new Object[3];
+                row[0] = order;
+                row[1] = order.getId();
+                row[2] = order.getStatus(); 
+                model.addRow(row);
             }
-            Object row[] = new Object[3];
-            row[0] = order.getId();
-            row[1] = order.getCustomer();
-            row[2] = order.getStatus(); 
-            model.addRow(row);
         }     
     }
 }

@@ -5,9 +5,11 @@
 package UserInterface.EcommerceOperation;
 
 import Business.Business;
+import Business.Enterprise.Enterprise;
 import Business.Order.Order;
 import Business.Order.OrderItem;
 import Business.Product.Product;
+import UserInterface.EcommerceSales.EcommerceSalesMenuJPanel;
 import UserInterface.WholesalerOperationRole.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,15 +24,19 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EcoViewProductJPanel
      */
-    JPanel userProcessContainer;
+    Enterprise ep;
     Business business;
-    public EcoViewProductJPanel(Business business, JPanel userProcessContainer) {
+    JPanel CardSequencePanel;
+    
+    public EcoViewProductJPanel(Enterprise ep, Business business, JPanel CardSequencePanel) {
         initComponents();
-        this.userProcessContainer=userProcessContainer;
+        this.ep = ep;
         this.business = business;
+        this.CardSequencePanel = CardSequencePanel;
         
         populateTable();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,8 +47,8 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         comboType = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         btnRefresh = new javax.swing.JButton();
@@ -51,11 +57,16 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
         tblProduct = new javax.swing.JTable();
         txtSellPrice = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel1.setText("View Inventory");
+        lblTitle = new javax.swing.JLabel();
 
         comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Category", " " }));
+
+        jButton1.setText("<< Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -86,11 +97,12 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ProductID", "Name", "Category", "Cost price", "Quantity", "Description", "Sell Price"
+                "Name", "ProductID", "Category", "Cost price", "Quantity", "Description", "Sell Price"
             }
         ));
         jScrollPane1.setViewportView(tblProduct);
 
+        txtSellPrice.setMinimumSize(new java.awt.Dimension(64, 30));
         txtSellPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSellPriceActionPerformed(evt);
@@ -99,44 +111,45 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Sell Price:");
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("View Inventory");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel2)
-                            .addGap(29, 29, 29)
-                            .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(btnSetPrice)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(55, 55, 55)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(44, 44, 44)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSearch))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(369, Short.MAX_VALUE))
+                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSearch))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
+                .addContainerGap(170, Short.MAX_VALUE))
+            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addComponent(lblTitle)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
@@ -150,7 +163,9 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(btnRefresh)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(jButton1)
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,8 +181,8 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
             if (Integer.toString(product.getId()).equals(keyword)){
 
                 Object row[] = new Object[7];
-                row[0] = product.getId();
-                row[1] = product.getName();
+                row[0] = product;
+                row[1] = product.getId();
                 row[2] = product.getCategory();
                 row[3] = product.getPrice(); 
                 row[4] = product.getQuantity();
@@ -183,8 +198,8 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
             if ((product.getName()).equals(keyword)){
 
                 Object row[] = new Object[7];
-                row[0] = product.getId();
-                row[1] = product.getName();
+                row[0] = product;
+                row[1] = product.getId();
                 row[2] = product.getCategory();
                 row[3] = product.getPrice(); 
                 row[4] = product.getQuantity();
@@ -200,8 +215,8 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
             if ((product.getCategory()).equals(keyword)){
 
                 Object row[] = new Object[7];
-                row[0] = product.getId();
-                row[1] = product.getName();
+                row[0] = product;
+                row[1] = product.getId();
                 row[2] = product.getCategory();
                 row[3] = product.getPrice(); 
                 row[4] = product.getQuantity();
@@ -236,15 +251,24 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSetPriceActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        EcommerceOperationMenuJPanel menu = new EcommerceOperationMenuJPanel(ep, business, CardSequencePanel);
+        CardSequencePanel.removeAll();
+        CardSequencePanel.add("EcommerceOperationMenuJPanel", menu);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSetPrice;
     private javax.swing.JComboBox<String> comboType;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblProduct;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSellPrice;
@@ -254,11 +278,11 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
         model.setRowCount(0);
 
-        for (Product product: business.getEcommerceproductlist().getProductDirectory()) {
+        for (Product product: ep.getEcommerceproductlist().getProductDirectory()) {
 
             Object row[] = new Object[7];
-            row[0] = product.getId();
-            row[1] = product.getName();
+            row[0] = product;
+            row[1] = product.getId();
             row[2] = product.getCategory();
             row[3] = product.getPrice(); 
             row[4] = product.getQuantity();

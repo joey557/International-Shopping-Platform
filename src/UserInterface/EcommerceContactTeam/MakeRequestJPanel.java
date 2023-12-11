@@ -23,18 +23,21 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form MakeRequestJPanel
      */
+    Enterprise ep;
     Order order;
     UserAccount ua;
     Business business;
     JPanel CardSequencePanel;
     
-    MakeRequestJPanel(Order order, UserAccount ua, Business business, JPanel CardSequencePanel) {
+    MakeRequestJPanel(Enterprise ep, Order order, UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
         this.order = order;
         this.ua = ua;
         this.business = business;
         this.CardSequencePanel = CardSequencePanel;
-        
+        txtOrderID.setText(String.valueOf(order.getId()));
+
         //populateTable();
     }
 
@@ -54,6 +57,7 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
         txtMessage = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         jLabel1.setText("OrderID:");
 
@@ -79,35 +83,37 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Make a Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(262, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 167, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(229, 229, 229))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addComponent(btnBack)
-                .addGap(29, 29, 29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+                .addGap(92, 92, 92)
+                .addComponent(lblTitle)
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -118,17 +124,17 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49)
+                .addGap(43, 43, 43)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(btnBack)
-                .addGap(68, 68, 68))
+                .addGap(64, 64, 64))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ua, business, CardSequencePanel);
+        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ep, ua, business, CardSequencePanel);
         CardSequencePanel.removeAll();
         CardSequencePanel.add("EcoCTMenuJPanel", ecoctmenuarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -136,7 +142,6 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        txtOrderID.setText(String.valueOf(order.getId()));
         String message = txtMessage.getText();
         
         if(message.equals("") || message.isEmpty()){
@@ -153,14 +158,14 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
             if (ep.getEnterpriseType().equals("Wholesaler")) {
                 Organization org = null;
                 for (Organization organization : ep.getOrganizationDirectory().getOrganizationlist()) {
-                    if (organization.getName().equals("Customer Service")) {
+                    if (organization.getName().equals("Contact Team")) {
                         org = organization;
                         break;
                     }
                 }
                 if (org!=null){
-                org.getWorkqueue().getWorkreqlist().add(request);
-                ua.getWorkQueue().getWorkreqlist().add(request);
+                    org.getWorkqueue().getWorkreqlist().add(request);
+                    ua.getWorkQueue().getWorkreqlist().add(request);
 //        }
             }
         }
@@ -188,6 +193,7 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextArea txtMessage;
     private javax.swing.JTextField txtOrderID;
     // End of variables declaration//GEN-END:variables
