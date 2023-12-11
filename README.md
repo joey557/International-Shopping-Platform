@@ -2,7 +2,7 @@
 ## Solution Introduction
 
 
-## Problem solved
+## Definition of Problem
 
 
 ## Stakeholder and Contributions
@@ -29,3 +29,8 @@
 
 
 ## Use Cases
+![Screenshot 2023-12-10 at 10 46 19 PM](https://github.com/aed5100/final-project-tfboys3-0/assets/144818327/dae04fae-8869-4164-9664-855b03fbd0fb)
+
+## Design
+
+![Screenshot 2023-12-10 at 10 32 48 PM](https://github.com/aed5100/final-project-tfboys3-0/assets/144818327/9cb62e8e-25c8-45c9-8acc-058e083fdc64)
