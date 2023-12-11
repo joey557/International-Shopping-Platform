@@ -82,5 +82,8 @@ public class Order {
         return count;
     }
     
-   
+    @Override
+    public String toString() {
+        return customer;
+    }
 }
