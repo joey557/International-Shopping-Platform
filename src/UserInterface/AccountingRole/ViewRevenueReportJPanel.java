@@ -71,7 +71,8 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
 
         txtTotalRevenue.setEnabled(false);
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Revenue Report");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -87,10 +88,7 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
                         .addComponent(txtTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(93, 93, 93))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(335, 335, 335)
-                .addComponent(lblTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +101,7 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,7 +121,7 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
         
         for (Product p : business.getWholesalerproductlist().getProductDirectory()) { // based on wholesaler or e-commerce
             Object row[] = new Object[4];
-            row[0] = p.getName();
+            row[0] = p;
             row[1] = p.getPrice();
             row[2] = p.getSoldQuantity();
             row[3] = p.getPrice() * p.getSoldQuantity();

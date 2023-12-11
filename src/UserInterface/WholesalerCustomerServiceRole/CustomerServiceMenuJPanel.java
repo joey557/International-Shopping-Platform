@@ -1,8 +1,14 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UserInterface.WholesalerCustomerServiceRole;
+
+import Business.Business;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
 
 /**
  *
@@ -13,8 +19,20 @@ public class CustomerServiceMenuJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CustomerServiceWorkArea
      */
-    public CustomerServiceMenuJPanel() {
+    JPanel userProcessContainer;
+    Business business;
+    UserAccount ua;
+    Organization org;
+    Enterprise enterprise;
+    
+    public CustomerServiceMenuJPanel(Enterprise enterprise, UserAccount ua, Business business, Organization org, JPanel userProcessContainer) {
         initComponents();
+        this.enterprise = enterprise;
+        this.userProcessContainer = userProcessContainer;
+        this.ua = ua;
+        this.business = business;
+        this.org = org;
+        
     }
 
     /**
@@ -26,23 +44,7 @@ public class CustomerServiceMenuJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRequestService = new javax.swing.JButton();
-        btnProcessRequest = new javax.swing.JButton();
         btnManageRequest = new javax.swing.JButton();
-
-        btnRequestService.setText("Request Service");
-        btnRequestService.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRequestServiceActionPerformed(evt);
-            }
-        });
-
-        btnProcessRequest.setText("Process Request");
-        btnProcessRequest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessRequestActionPerformed(evt);
-            }
-        });
 
         btnManageRequest.setText("Manage Request");
         btnManageRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -56,43 +58,29 @@ public class CustomerServiceMenuJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnManageRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRequestService, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84)
-                .addComponent(btnProcessRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGap(307, 307, 307)
+                .addComponent(btnManageRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRequestService, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProcessRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addGap(222, 222, 222)
                 .addComponent(btnManageRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRequestServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestServiceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRequestServiceActionPerformed
-
-    private void btnProcessRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessRequestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProcessRequestActionPerformed
-
     private void btnManageRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRequestActionPerformed
         // TODO add your handling code here:
+        ManageRequestJPanel customerservice = new ManageRequestJPanel( enterprise,  userProcessContainer,  ua,  org,  business);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("CustomerServiceMenuJPanel", customerservice);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnManageRequestActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageRequest;
-    private javax.swing.JButton btnProcessRequest;
-    private javax.swing.JButton btnRequestService;
     // End of variables declaration//GEN-END:variables
 }

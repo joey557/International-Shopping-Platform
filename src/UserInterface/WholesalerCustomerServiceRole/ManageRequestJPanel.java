@@ -4,12 +4,12 @@
  */
 package UserInterface.WholesalerCustomerServiceRole;
 
-import business.Business;
-import business.Organization.LabOrganization;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
-import business.WorkQueue.LabTestWorkRequest;
-import business.WorkQueue.WorkRequest;
+import Business.Business;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.OrderWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,21 +21,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageRequestJPanel extends javax.swing.JPanel {
 
-    private JPanel userProcessContainer;
-    private Business business;
-    private UserAccount userAccount;
-    private LabOrganization labOrganization;
+    JPanel userProcessContainer;
+    Business business;
+    UserAccount userAccount;
+    Organization org;
+    Enterprise enterprise;
 
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ManageRequestJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Business business) {
+    public ManageRequestJPanel(Enterprise enterprise, JPanel userProcessContainer, UserAccount userAccount, Organization organization, Business business) {
         initComponents();
+        this.enterprise = enterprise;
 
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = account;
+        this.userAccount = userAccount;
         this.business = business;
-        this.labOrganization = (LabOrganization) organization;
+        this.org = org;
 
         populateTable();
     }
@@ -45,7 +47,7 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
 
-        for (WorkRequest request : labOrganization.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest request : org.getWorkqueue().getWorkreqlist()) {
             Object[] row = new Object[4];
             row[0] = request;
             row[1] = request.getSender().getEmployee().getName();
@@ -70,8 +72,8 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
         btnAssign = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -130,9 +132,6 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Manage Request");
-
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,27 +139,30 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Manage Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAssign)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnProcess))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnRefresh)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBack)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(323, 323, 323)
-                        .addComponent(lblTitle)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(btnAssign)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnProcess))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnRefresh)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBack))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAssign, btnProcess});
@@ -168,9 +170,9 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(58, 58, 58)
                 .addComponent(lblTitle)
-                .addGap(38, 38, 38)
+                .addGap(90, 90, 90)
                 .addComponent(btnRefresh)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,9 +180,9 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAssign)
                     .addComponent(btnProcess))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(btnBack)
-                .addGap(60, 60, 60))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,7 +215,7 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
-            LabTestWorkRequest request = (LabTestWorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
+            OrderWorkRequest request = (OrderWorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 
@@ -235,13 +237,10 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
-        userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageRequestJPanel lwjp = (ManageRequestJPanel) component;
-        lwjp.populateTable();
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+        CustomerServiceMenuJPanel customerservice = new CustomerServiceMenuJPanel( enterprise,  userAccount,  business,  org,  userProcessContainer);
+        userProcessContainer.removeAll();
+        userProcessContainer.add("CustomerServiceMenuJPanel", customerservice);
+        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

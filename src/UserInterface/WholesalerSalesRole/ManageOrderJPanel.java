@@ -41,16 +41,13 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
         comboType = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel1.setText("Wholesaler Sales Panel ");
+        lblTitle = new javax.swing.JLabel();
 
         btnDetail.setText("View Details");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
@@ -76,40 +73,40 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "OrderID", "Customer", "Total Amount", "Status"
+                "Customer", "OrderID", "Total Amount", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblOrder);
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Manage Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnDetail)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSearch))))))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(119, 119, 119)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDetail)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSearch))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(66, 66, 66)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +115,7 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnDetail)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(84, 84, 84))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,8 +151,8 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                     count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
                 }
                 Object row[] = new Object[4];
-                row[0] = order.getId();
-                row[1] = order.getCustomer();
+                row[0] = order;
+                row[1] = order.getId();
                 row[2] = count;
                 row[3] = order.getStatus(); 
                 model.addRow(row);
@@ -171,8 +168,8 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
                     count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
                 }
                 Object row[] = new Object[4];
-                row[0] = order.getId();
-                row[1] = order.getCustomer();
+                row[0] = order;
+                row[1] = order.getId();
                 row[2] = count;
                 row[3] = order.getStatus(); 
                 model.addRow(row);
@@ -186,8 +183,8 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> comboType;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
@@ -201,9 +198,9 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
             for (OrderItem orderitem : order.getOrderItemList()) {
                 count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 
             }
-            Object row[] = new Object[3];
-            row[0] = order.getId();
-            row[1] = order.getCustomer();
+            Object row[] = new Object[4];
+            row[0] = order;
+            row[1] = order.getId();
             row[2] = count;
             row[3] = order.getStatus(); 
             model.addRow(row);

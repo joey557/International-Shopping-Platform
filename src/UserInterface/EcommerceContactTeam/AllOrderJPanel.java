@@ -6,6 +6,7 @@ package UserInterface.EcommerceContactTeam;
 
 import Business.Business;
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
 import Business.Order.Order;
 import Business.Product.Product;
 import Business.UserAccount.UserAccount;
@@ -23,12 +24,14 @@ public class AllOrderJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AllOrderJPanel
      */
+    Enterprise ep;
     UserAccount ua;
     Business business;
     JPanel CardSequencePanel;
     
-    AllOrderJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
+    AllOrderJPanel(Enterprise ep, UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
         this.ua = ua;
         this.business = business;
         this.CardSequencePanel = CardSequencePanel;
@@ -47,12 +50,12 @@ public class AllOrderJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnMakeRequest = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        lblTitle = new javax.swing.JLabel();
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,9 +69,6 @@ public class AllOrderJPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tblOrder);
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setText("View Order");
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -93,50 +93,48 @@ public class AllOrderJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Order id:");
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("View Order");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(447, 447, 447)
+                        .addComponent(btnMakeRequest))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMakeRequest)))))
-                .addContainerGap(84, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSearch)
-                .addGap(240, 240, 240))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnSearch))
+                    .addComponent(btnBack))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(42, 42, 42)
+                .addComponent(lblTitle)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch)
                     .addComponent(jLabel2)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMakeRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnMakeRequest)
+                .addGap(56, 56, 56)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,7 +145,7 @@ public class AllOrderJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ua, business, CardSequencePanel);
+        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ep, ua, business, CardSequencePanel);
         CardSequencePanel.removeAll();
         CardSequencePanel.add("EcoCTMenuJPanel", ecoctmenuarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -159,8 +157,8 @@ public class AllOrderJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
 
             int id = Integer.parseInt(tblOrder.getModel().getValueAt(selectedRow, 0).toString());
-            Order order = ua.getMasterorderlist().findOrder(id);
-            MakeRequestJPanel makerequestarea = new MakeRequestJPanel(order,ua, business, CardSequencePanel);
+            Order order = ep.getMasterorderlist().findOrder(id);
+            MakeRequestJPanel makerequestarea = new MakeRequestJPanel(ep, order,ua, business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("MakeRequestJPanel", makerequestarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -177,9 +175,9 @@ public class AllOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnMakeRequest;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
@@ -188,7 +186,7 @@ public class AllOrderJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
         model.setRowCount(0);
 
-        for (Order order: ua.getMasterorderlist().getOrderList()) {
+        for (Order order: ep.getMasterorderlist().getOrderList()) {
             Object row[] = new Object[3];
             row[0] = order.getId();
             row[1] = order.Totalamount();
@@ -201,7 +199,7 @@ public class AllOrderJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
         model.setRowCount(0);
 
-        for (Order order: ua.getMasterorderlist().getOrderList()) {
+        for (Order order: ep.getMasterorderlist().getOrderList()) {
             if (order.getId() == id) {
                 Object row[] = new Object[3];
                 row[0] = order.getId();

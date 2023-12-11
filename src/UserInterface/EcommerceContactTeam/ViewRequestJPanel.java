@@ -22,12 +22,14 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewRequestJPanel
      */
+    Enterprise ep;
     UserAccount ua;
     Business business;
     JPanel CardSequencePanel;
     
-    ViewRequestJPanel(UserAccount ua, Business business, JPanel CardSequencePanel) {
+    ViewRequestJPanel(Enterprise ep, UserAccount ua, Business business, JPanel CardSequencePanel) {
         initComponents();
+        this.ep = ep;
         this.ua = ua;
         this.business = business;
         this.CardSequencePanel = CardSequencePanel;
@@ -47,8 +49,8 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,8 +80,6 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblWorkRequests);
 
-        jLabel1.setText("View Request");
-
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,37 +87,38 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("View Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1)
-                .addContainerGap(551, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBack)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addGap(68, 68, 68))
+            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(90, 90, 90)
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(81, 81, 81)
                 .addComponent(btnBack)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(112, 112, 112))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ua, business, CardSequencePanel);
+        EcoCTMenuJPanel ecoctmenuarea = new EcoCTMenuJPanel(ep, ua, business, CardSequencePanel);
         CardSequencePanel.removeAll();
         CardSequencePanel.add("EcoCTMenuJPanel", ecoctmenuarea);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -126,8 +127,8 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;
     // End of variables declaration//GEN-END:variables
 
@@ -141,7 +142,7 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
             if (ep.getEnterpriseType().equals("Wholesaler")) {
                 Organization org = null;
                 for (Organization organization : ep.getOrganizationDirectory().getOrganizationlist()) {
-                    if (organization.getName().equals("ContactTeam")) {
+                    if (organization.getName().equals("Contact Team")) {
                         org = organization;
                         break;
                     }
@@ -151,8 +152,9 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
                         Object[] row = new Object[4];
                         row[0] = request;
                         row[1] = request.getSender().getEmployee().getName();
-                        row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-                        row[3] = request.getStatus();
+                        row[2] = request.getStatus();
+                        row[3] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+                        
 
                         model.addRow(row);
                     }    

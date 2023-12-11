@@ -45,4 +45,9 @@ public class ProductDirectory {
     public int getProductCount(){
         return productlist.size();
     }
+    
+    public Product addNewProduct(Product p) {
+        productlist.add(p);
+        return p;
+    }
 }

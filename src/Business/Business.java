@@ -24,7 +24,18 @@ public class Business {
     ProductDirectory ecommerceproductlist;
     MasterOrderList orderlist;
     UserAccountDirectory useracclist;
+    
+    public Business() {
 
+        enterprise = new Enterprise();
+        enterpriselist = new EnterpriseDirectory();
+        wholesalerproductlist = new ProductDirectory();
+        ecommerceproductlist = new ProductDirectory();
+        orderlist = new MasterOrderList();
+        useracclist = new UserAccountDirectory();
+
+    }
+    
     public Business(String n) {
         name = n;
 

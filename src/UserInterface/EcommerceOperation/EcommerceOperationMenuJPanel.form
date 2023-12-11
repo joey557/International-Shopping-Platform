@@ -16,33 +16,46 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
-              <Component id="btnManageEmployee" min="-2" pref="164" max="-2" attributes="0"/>
-              <EmptySpace pref="324" max="32767" attributes="0"/>
-          </Group>
           <Component id="lblTitle" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnManageOrder" max="32767" attributes="0"/>
+                  <Component id="btnViewProduct" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="352" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
-              <Component id="btnManageEmployee" min="-2" pref="59" max="-2" attributes="0"/>
-              <EmptySpace pref="284" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
+              <Component id="btnViewProduct" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Component id="btnManageOrder" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="288" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnManageEmployee">
+    <Component class="javax.swing.JButton" name="btnManageOrder">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Employee"/>
+        <Property name="text" type="java.lang.String" value="Manage Order"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageEmployeeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageOrderActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewProductActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
@@ -51,7 +64,7 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Admin&apos;s Work Area"/>
+        <Property name="text" type="java.lang.String" value="E-commerce Operation&apos;s Work Area"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -5,9 +5,11 @@
 package Business.Enterprise;
 
 import Business.Employee.EmployeeDirectory;
+import Business.Order.MasterOrderList;
 import Business.Order.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.Product.Product;
 import Business.Product.ProductDirectory;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
@@ -27,6 +29,9 @@ public class Enterprise{
     private UserAccount acc;
     private UserAccountDirectory eeacclist;
     private Order orderlist;
+    private MasterOrderList masterorderlist;
+    private ProductDirectory ecommerceproductlist;
+
 
     public Enterprise(){
         
@@ -35,9 +40,20 @@ public class Enterprise{
         organizationDirectory = new OrganizationDirectory();
         eeacclist = new UserAccountDirectory();
         orderlist = new Order();
+        masterorderlist = new MasterOrderList();
+        ecommerceproductlist = new ProductDirectory();
          
     }
 
+    public MasterOrderList getMasterorderlist() {
+        return masterorderlist;
+    }
+
+    public void setMasterorderlist(MasterOrderList masterorderlist) {
+        this.masterorderlist = masterorderlist;
+    }
+    
+    
     public UserAccountDirectory getEeacclist() {
         return eeacclist;
     }
@@ -108,7 +124,15 @@ public class Enterprise{
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
+    public ProductDirectory getEcommerceproductlist() {
+        return ecommerceproductlist;
+    }
+
+    public void setEcommerceproductlist(ProductDirectory ecommerceproductlist) {
+        this.ecommerceproductlist = ecommerceproductlist;
+    }
+   
     
     
 }

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.EcommerceContactTeam;
+package UserInterface.EcommerceOperation;
 
+import UserInterface.EcommerceContactTeam.*;
 import Business.Business;
 import Business.Enterprise.Enterprise;
 import Business.UserAccount.UserAccount;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
  *
  * @author joey
  */
-public class EcoCTMenuJPanel extends javax.swing.JPanel {
+public class EcommerceOperationMenuJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form EcoCTJPanel
@@ -22,13 +23,14 @@ public class EcoCTMenuJPanel extends javax.swing.JPanel {
     UserAccount ua;
     Business business;
     JPanel CardSequencePanel;
-    
-    public EcoCTMenuJPanel(Enterprise ep, UserAccount ua, Business business, JPanel CardSequencePanel) {
-        initComponents();
-        this.ep = ep;
-        this.ua = ua;
+   
+
+    public EcommerceOperationMenuJPanel(Enterprise enterprise, Business business, JPanel CardSequencePanel) {
+        this.ep = enterprise;
         this.business = business;
         this.CardSequencePanel = CardSequencePanel;
+        initComponents();
+
     }
 
     /**
@@ -40,27 +42,27 @@ public class EcoCTMenuJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnView = new javax.swing.JButton();
-        btnMake = new javax.swing.JButton();
+        btnManageOrder = new javax.swing.JButton();
+        btnViewProduct = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
-        btnView.setText("View Request");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
+        btnManageOrder.setText("Manage Order");
+        btnManageOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
+                btnManageOrderActionPerformed(evt);
             }
         });
 
-        btnMake.setText("Make Request");
-        btnMake.addActionListener(new java.awt.event.ActionListener() {
+        btnViewProduct.setText("View Product");
+        btnViewProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMakeActionPerformed(evt);
+                btnViewProductActionPerformed(evt);
             }
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Contact Team's Work Area");
+        lblTitle.setText("E-commerce Operation's Work Area");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,45 +70,45 @@ public class EcoCTMenuJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(319, 319, 319)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMake))
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addGap(335, 335, 335)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnManageOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnViewProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(64, 64, 64)
                 .addComponent(lblTitle)
-                .addGap(91, 91, 91)
-                .addComponent(btnMake, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(147, 147, 147)
+                .addComponent(btnViewProduct)
+                .addGap(33, 33, 33)
+                .addComponent(btnManageOrder)
+                .addContainerGap(288, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeActionPerformed
+    private void btnViewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewProductActionPerformed
         // TODO add your handling code here:
-        AllOrderJPanel allorderarea = new AllOrderJPanel(ep, ua, business, CardSequencePanel);
+        EcoViewProductJPanel viewproduct = new EcoViewProductJPanel(ep, business, CardSequencePanel);
         CardSequencePanel.removeAll();
-        CardSequencePanel.add("AllOrderJPanel", allorderarea);
+        CardSequencePanel.add("EcoViewProductJPanel", viewproduct);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-    }//GEN-LAST:event_btnMakeActionPerformed
+    }//GEN-LAST:event_btnViewProductActionPerformed
 
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+    private void btnManageOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrderActionPerformed
         // TODO add your handling code here:
-        ViewRequestJPanel viewrequestarea = new ViewRequestJPanel(ep, ua, business, CardSequencePanel);
+        ManageOrderStatusJPanel manageorder = new ManageOrderStatusJPanel(ep, business, CardSequencePanel);
         CardSequencePanel.removeAll();
-        CardSequencePanel.add("ViewRequestJPanel", viewrequestarea);
+        CardSequencePanel.add("ManageOrderStatusJPanel", manageorder);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-    }//GEN-LAST:event_btnViewActionPerformed
+    }//GEN-LAST:event_btnManageOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMake;
-    private javax.swing.JButton btnView;
+    private javax.swing.JButton btnManageOrder;
+    private javax.swing.JButton btnViewProduct;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 }
