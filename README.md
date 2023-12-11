@@ -1,6 +1,12 @@
 # International Shopping Platform
 ## Solution Introduction
-
+In the rapidly expanding realm of global e-commerce, international trade faces significant challenges in terms of efficiency, reliability, and seamless integration between various stakeholders, including wholesalers, shipping companies, and e-commerce platforms across borders. 
+Our solution, the InternationalShipping Platform, addresses these challenges by offering an integrated, user-friendly digital platform that streamlines cross-border e-commerce trade. 
+This platform acts as a bridge connecting domestic wholesalers with international shipping companies and foreign e-commerce platforms. The key problems solved include:
+-gistics Management: Simplifying the process of shipping goods internationally by providing wholesalers with easy access to reliable shipping companies, facilitating smoother logistics and export processes.
+-Market Expansion: Enabling domestic wholesalers to reach foreign e-commerce markets more efficiently, thus expanding their global footprint and market reach.
+-Providing a centralized platform where all transactions, from order placement to delivery, can be managed seamlessly, enhancing the overall efficiency and reducing the time and costs associated with international trade.
+-Diversity of Products: Helping foreign e-commerce platforms to diversify their product offerings by providing access to a wider range of products from different domestic markets.
 
 ## Definition of Problem
 
