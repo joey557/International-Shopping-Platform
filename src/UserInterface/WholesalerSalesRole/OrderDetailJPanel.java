@@ -7,6 +7,7 @@ package UserInterface.WholesalerSalesRole;
 import Business.Business;
 import Business.Order.Order;
 import Business.Order.OrderItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +45,6 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         tblDetail = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtOrderId = new javax.swing.JTextField();
-        btnBack1 = new javax.swing.JButton();
         btnSendPackage = new javax.swing.JButton();
 
         tblDetail.setModel(new javax.swing.table.DefaultTableModel(
@@ -55,7 +55,7 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ProductID", "Name", "Category", "Price", "Quantity"
+                "Name", "ProductID", "Category", "Price", "Quantity"
             }
         ));
         jScrollPane1.setViewportView(tblDetail);
@@ -66,13 +66,6 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         txtOrderId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtOrderIdActionPerformed(evt);
-            }
-        });
-
-        btnBack1.setText("<<Back");
-        btnBack1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBack1ActionPerformed(evt);
             }
         });
 
@@ -87,39 +80,30 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSendPackage))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(462, 462, 462)
-                        .addComponent(btnBack1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnSendPackage, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(btnSendPackage)
-                .addGap(18, 18, 18)
-                .addComponent(btnBack1)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,22 +111,15 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrderIdActionPerformed
 
-    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
-        // TODO add your handling code here:
-        ManageOrderJPanel salesworkarea = new ManageOrderJPanel(business, userProcessContainer);
-        userProcessContainer.removeAll();
-        userProcessContainer.add("ManageOrderJPanel", salesworkarea);
-        ((java.awt.CardLayout) userProcessContainer.getLayout()).next(userProcessContainer);
-    }//GEN-LAST:event_btnBack1ActionPerformed
-
     private void btnSendPackageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendPackageActionPerformed
         // TODO add your handling code here:
         order.setStatus("Send for delivery");
+        JOptionPane.showMessageDialog(this, "Package send successfully");
+
     }//GEN-LAST:event_btnSendPackageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnSendPackage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -157,8 +134,8 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         for (OrderItem orderitem: order.getOrderItemList()) {
 
             Object row[] = new Object[5];
-            row[0] = orderitem.getProduct().getId();
-            row[1] = orderitem.getProduct().getName();
+            row[0] = orderitem.getProduct();
+            row[1] = orderitem.getProduct().getId();
             row[2] = orderitem.getProduct().getCategory();
             row[3] = orderitem.getProduct().getPrice(); 
             row[4] = orderitem.getQuantity();
