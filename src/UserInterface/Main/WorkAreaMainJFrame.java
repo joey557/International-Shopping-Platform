@@ -39,6 +39,8 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
     public WorkAreaMainJFrame() {
         initComponents();
         business = ConfigureABusiness.initialize();
+        setSize(1100, 800);
+
     }
 
     /**
@@ -55,9 +57,9 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
         CardSequencePanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -70,8 +72,6 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         jLabel2.setText("Password:");
-
-        txtPassword.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -87,22 +87,28 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout actionsidePanelLayout = new javax.swing.GroupLayout(actionsidePanel);
         actionsidePanel.setLayout(actionsidePanelLayout);
         actionsidePanelLayout.setHorizontalGroup(
             actionsidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(actionsidePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, actionsidePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(actionsidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername)
+                .addGroup(actionsidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPassword)
-                    .addGroup(actionsidePanelLayout.createSequentialGroup()
+                    .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, actionsidePanelLayout.createSequentialGroup()
                         .addGroup(actionsidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         actionsidePanelLayout.setVerticalGroup(
@@ -114,9 +120,9 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogout)
@@ -150,7 +156,8 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String un = txtUsername.getText();
-        String pw = txtPassword.getText();
+        char[] pwArr = txtPassword.getPassword();
+        String pw = new String(pwArr);
         
         
         EnterpriseDirectory eplist = business.getEnterpriselist();
@@ -272,6 +279,10 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,7 +327,7 @@ public class WorkAreaMainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,6 +39,8 @@ public class WholesalerOperationMenuJPanel extends javax.swing.JPanel {
         btnViewProduct = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         btnAddProduct.setText("Add Product");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

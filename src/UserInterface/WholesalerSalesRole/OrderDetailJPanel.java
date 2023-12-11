@@ -47,6 +47,8 @@ public class OrderDetailJPanel extends javax.swing.JPanel {
         txtOrderId = new javax.swing.JTextField();
         btnSendPackage = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         tblDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

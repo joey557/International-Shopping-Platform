@@ -30,7 +30,7 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ManageRequestJPanel(Enterprise enterprise, JPanel userProcessContainer, UserAccount userAccount, Organization organization, Business business) {
+    public ManageRequestJPanel(Enterprise enterprise, JPanel userProcessContainer, UserAccount userAccount, Organization org, Business business) {
         initComponents();
         this.enterprise = enterprise;
 
@@ -75,7 +75,7 @@ public class ManageRequestJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(234, 244, 244));
 
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

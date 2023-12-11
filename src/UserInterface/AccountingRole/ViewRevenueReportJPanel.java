@@ -46,6 +46,8 @@ public class ViewRevenueReportJPanel extends javax.swing.JPanel {
         txtTotalRevenue = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         tblRevenue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

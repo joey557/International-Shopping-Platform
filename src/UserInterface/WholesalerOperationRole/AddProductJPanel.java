@@ -7,6 +7,7 @@ package UserInterface.WholesalerOperationRole;
 import Business.Business;
 import Business.Product.Product;
 import Business.Product.ProductDirectory;
+import Business.Regex.Valid;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -50,6 +51,8 @@ public class AddProductJPanel extends javax.swing.JPanel {
         txtDescription = new javax.swing.JTextArea();
         comboCategory = new javax.swing.JComboBox<>();
         lblTitle = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         jLabel2.setText("Product Name:");
 
@@ -186,21 +189,33 @@ public class AddProductJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         String name = txtName.getText();
+        String inputprice = txtPrice.getText();
+        String inputquantity = txtQuantity.getText();
         String category = comboCategory.getSelectedItem().toString();
-        int price = Integer.parseInt(txtPrice.getText());
-        int quantity = Integer.parseInt(txtQuantity.getText());
         String description = txtDescription.getText();
         
-        //TODO: validation
-        Product newproduct = business.getWholesalerproductlist().addProduct();
-        newproduct.setName(name);
-        newproduct.setCategory(category);
-        newproduct.setPrice(price);
-        newproduct.setQuantity(quantity);
-        newproduct.setDescription(description);
-        newproduct.setAvail(quantity);
+        if (!Valid.getInstance().validNum(inputprice)) {
+            JOptionPane.showMessageDialog(null, "Price should be numbers", "Warning", JOptionPane.WARNING_MESSAGE);
 
-        JOptionPane.showMessageDialog(this, "New product added");
+        }else {
+            if (!Valid.getInstance().validNum(inputquantity)) {
+                JOptionPane.showMessageDialog(null, "Quantity should be numbers", "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                int price = Integer.parseInt(txtPrice.getText());
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                Product newproduct = business.getWholesalerproductlist().addProduct();
+                newproduct.setName(name);
+                newproduct.setCategory(category);
+                newproduct.setPrice(price);
+                newproduct.setQuantity(quantity);
+                newproduct.setDescription(description);
+                newproduct.setAvail(quantity);
+
+                JOptionPane.showMessageDialog(this, "New product added");
+            }
+        }
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

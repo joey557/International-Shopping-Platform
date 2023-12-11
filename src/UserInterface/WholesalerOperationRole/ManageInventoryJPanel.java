@@ -58,6 +58,8 @@ public class ManageInventoryJPanel extends javax.swing.JPanel {
         comboCategory = new javax.swing.JComboBox<>();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         txtDescription.setColumns(20);
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);

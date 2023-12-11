@@ -50,6 +50,8 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +175,7 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Order order: business.getOrderlist().getOrderList()) {
-            if (order.getStatus().equals("Send for delivery")) {
+            if (order.getStatus().equals("Send for delivery") || order.getStatus().equals("Shipped")) {
                 int count = 0;
                 for (OrderItem orderitem : order.getOrderItemList()) {
                     count += orderitem.getQuantity() * orderitem.getProduct().getPrice(); 

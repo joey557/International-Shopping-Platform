@@ -59,6 +59,8 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         jLabel1.setText("OrderID:");
 
         txtOrderID.setEditable(false);
@@ -181,9 +183,11 @@ public class MakeRequestJPanel extends javax.swing.JPanel {
 //            userAccount.getWorkQueue().getWorkRequestList().add(request);
 //        }
         
+        
+        }
         JOptionPane.showMessageDialog(null, "Request message sent");
         txtMessage.setText("");
-        }
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

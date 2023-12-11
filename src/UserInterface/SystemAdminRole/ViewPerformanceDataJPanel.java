@@ -6,6 +6,8 @@ package UserInterface.SystemAdminRole;
 
 import Business.Business;
 import Business.Enterprise.Enterprise;
+import Business.Order.Order;
+import Business.Order.OrderItem;
 import Business.Product.Product;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -44,18 +46,22 @@ public class ViewPerformanceDataJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtTotalEmployees = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtTotalRevenue = new javax.swing.JTextField();
+        txtOrders = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtRevenue = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Enterprise Name", "Enterprise Type", "Number of Employees", "Product"
+                "Enterprise Name", "Enterprise Type", "Number of Employees"
             }
         ));
         jScrollPane1.setViewportView(tblData);
@@ -66,32 +72,47 @@ public class ViewPerformanceDataJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Total Completed Order:");
 
-        txtTotalRevenue.setEnabled(false);
+        txtOrders.setEnabled(false);
+        txtOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrdersActionPerformed(evt);
+            }
+        });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Performance Data Dashboard");
 
+        jLabel3.setText("Total Revenue:");
+
+        txtRevenue.setEnabled(false);
+        txtRevenue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRevenueActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(400, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTotalEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(109, 109, 109))
             .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTotalEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,33 +122,48 @@ public class ViewPerformanceDataJPanel extends javax.swing.JPanel {
                 .addComponent(lblTitle)
                 .addGap(60, 60, 60)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTotalEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(108, 108, 108))
+                    .addComponent(txtOrders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrdersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrdersActionPerformed
+
+    private void txtRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRevenueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRevenueActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblData;
+    private javax.swing.JTextField txtOrders;
+    private javax.swing.JTextField txtRevenue;
     private javax.swing.JTextField txtTotalEmployees;
-    private javax.swing.JTextField txtTotalRevenue;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblData.getModel();
         model.setRowCount(0);
         int totalEmployees = 0;
+        int totalOrders = 0;
         int totalRevenue = 0;
         
         for (Enterprise enterprise : business.getEnterpriselist().getEnterpriselist()) {
@@ -138,12 +174,25 @@ public class ViewPerformanceDataJPanel extends javax.swing.JPanel {
             row[2] = enterprise.getEmployeelist().getEmployeelist().size();
             row[3] = enterprise.getOrderlist().Totalamount(); 
             totalEmployees += enterprise.getEmployeelist().getEmployeelist().size();
-            totalRevenue += enterprise.getOrderlist().Totalamount(); 
             model.addRow(row);
         }   
         
+        for (Order order : business.getOrderlist().getOrderList()) {
+            if (order.getStatus() == "Completed") {
+                totalOrders += 1;
+            }
+        }
+        
+        for (Order order : business.getOrderlist().getOrderList()) {
+            for (OrderItem orderitem : order.getOrderItemList()) {
+                totalRevenue += orderitem.getProduct().getPrice() * orderitem.getQuantity();
+            }
+        }
+        
         txtTotalEmployees.setText(String.valueOf(totalEmployees));
-        txtTotalRevenue.setText(String.valueOf(totalRevenue));
+        txtOrders.setText(String.valueOf(totalOrders));
+        txtRevenue.setText(String.valueOf(totalRevenue));
+        
 
     }
 }

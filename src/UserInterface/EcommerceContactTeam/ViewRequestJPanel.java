@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.OrderWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,8 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
         tblWorkRequests = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,12 +153,12 @@ public class ViewRequestJPanel extends javax.swing.JPanel {
                 if (org != null) {
                     for (WorkRequest request : org.getWorkqueue().getWorkreqlist()) {
                         Object[] row = new Object[4];
-                        row[0] = request;
-                        row[1] = request.getSender().getEmployee().getName();
+                        row[0] = request.getMessage();
+                        row[1] = request.getReceiver().getEmployee().getName();
                         row[2] = request.getStatus();
-                        row[3] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-                        
-
+                        String result = ((OrderWorkRequest) request).getOrderstatus();
+                        row[3] = result == null ? "Waiting" : result;
+            
                         model.addRow(row);
                     }    
                 }

@@ -8,6 +8,7 @@ import Business.Business;
 import Business.Employee.Employee;
 import Business.Employee.EmployeeDirectory;
 import Business.Enterprise.Enterprise;
+import Business.Regex.Valid;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -55,6 +56,8 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         txtID = new javax.swing.JTextField();
         btnCreateAccount = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         jLabel1.setText("Name:");
 
@@ -174,24 +177,27 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(txtID.getText());
+        String id = txtID.getText();
         String name = txtName.getText();
         
-        EmployeeDirectory employeelist = ep.getEmployeelist();
-        employeelist.addnewperson(name, id);
-        
-        
-        JOptionPane.showMessageDialog(this, "New employee added.");
+        if (!Valid.getInstance().validNum(id)) {
+            JOptionPane.showMessageDialog(null, "ID should be numbers", "Warning", JOptionPane.WARNING_MESSAGE);
+            
+        } else{
+            int newID = Integer.parseInt(txtID.getText());
+            EmployeeDirectory employeelist = ep.getEmployeelist();
+            employeelist.addnewperson(name, newID);
 
-        
-        txtName.setText("");
-        txtID.setText("");
-        populateTable();
-        
-        
-        
-        
-        
+
+            JOptionPane.showMessageDialog(this, "New employee added.");
+
+
+            txtName.setText("");
+            txtID.setText("");
+            populateTable();
+           
+        }
+                
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
