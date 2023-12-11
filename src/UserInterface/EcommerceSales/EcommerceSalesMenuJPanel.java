@@ -46,6 +46,8 @@ public class EcommerceSalesMenuJPanel extends javax.swing.JPanel {
         btnOrderstatus = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         btnOrdergoods.setText("Order Goods");
         btnOrdergoods.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

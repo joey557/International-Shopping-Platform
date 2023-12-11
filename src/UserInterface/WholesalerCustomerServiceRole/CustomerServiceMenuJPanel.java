@@ -46,6 +46,8 @@ public class CustomerServiceMenuJPanel extends javax.swing.JPanel {
 
         btnManageRequest = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         btnManageRequest.setText("Manage Request");
         btnManageRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

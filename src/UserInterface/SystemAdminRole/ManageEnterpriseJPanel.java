@@ -6,6 +6,7 @@ package UserInterface.SystemAdminRole;
 
 import Business.Business;
 import Business.Enterprise.Enterprise;
+import Business.Regex.Valid;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -51,6 +52,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         tableEnterprise.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,19 +212,51 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         String email = txtEmail.getText();
         String address = txtAddress.getText();
         
-        Enterprise ep = business.getEnterpriselist().addNewenterprise();
-        ep.setAddress(address);
-        ep.setEmail(email);
-        ep.setEnterpriseType(type);
-        ep.setName(name);
+        int wholesalerCount = 0;
+        int ecommerceCount = 0;
+        int shippingCount = 0;
+                
+        for (Enterprise ep : business.getEnterpriselist().getEnterpriselist()) {
+            if (ep.getEnterpriseType()=="Wholesaler") {
+                wholesalerCount += 1;
+            } else if (ep.getEnterpriseType()=="E-commerce platform") {
+                ecommerceCount += 1;
+            } else if (ep.getEnterpriseType()=="Shipping and Delivery Company") {
+                shippingCount += 1;
+            }
+        }
         
-        JOptionPane.showMessageDialog(this, "New enterprise added.");
+        if (type == "Wholesaler" && wholesalerCount >= 1) {
+            JOptionPane.showMessageDialog(null, "Wholesaler has existed, please select another type", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (type == "E-commerce platform" && ecommerceCount >= 2) {
+            JOptionPane.showMessageDialog(null, "E-commer platform has existed, please select another type", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (type == "Shipping and Delivery Company" && shippingCount >= 1) {
+            JOptionPane.showMessageDialog(null, "Shipping and delivery company has existed, please select another type", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if ( !Valid.getInstance().validEmail(email)) {
+            JOptionPane.showMessageDialog(null, "Please enter valid email.", "Warning", JOptionPane.WARNING_MESSAGE);
 
-        comboBoxenterprise.setSelectedItem("Wholesaler");
-        txtName.setText("");
-        txtEmail.setText("");
-        txtAddress.setText("");
-        populateTable();
+        } else {
+            Enterprise ep = business.getEnterpriselist().addNewenterprise();
+            ep.setAddress(address);
+            ep.setEmail(email);
+            ep.setEnterpriseType(type);
+            ep.setName(name);
+
+            JOptionPane.showMessageDialog(this, "New enterprise added.");
+
+            comboBoxenterprise.setSelectedItem("Wholesaler");
+            txtName.setText("");
+            txtEmail.setText("");
+            txtAddress.setText("");
+            populateTable();
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

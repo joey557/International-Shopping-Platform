@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
+import Business.Regex.Valid;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -61,6 +62,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
 
         jButton1.setText("Create");
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         jLabel1.setText("Employee Name:");
 
@@ -215,29 +218,34 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
-        Role newrole = new Role();
-        newrole.setType(role);
+         if (!Valid.getInstance().validPassword(password)) {
+                JOptionPane.showMessageDialog(null, "Please enter valid password", "Warning", JOptionPane.WARNING_MESSAGE);
         
-        if (ep.getOrganizationDirectory().findOrgbyName(orgtype) != null) {
-            Organization org = ep.getOrganizationDirectory().findOrgbyName(orgtype);
-            UserAccountDirectory acclist = org.getAcclist();
-            acclist.createUser(username, password, ee, newrole);
-            UserAccountDirectory epacclist = ep.getEeacclist();
-            epacclist.createUser(username, password, ee, newrole);
-        } else {
-            Organization org = new Organization(orgtype);
-            org.setName(orgtype);
-            UserAccountDirectory useracclist = new UserAccountDirectory();
-            useracclist.createUser(username, password, ee, newrole);
-            UserAccountDirectory epacclist = ep.getEeacclist();
-            epacclist.createUser(username, password, ee, newrole);
-            org.setAcclist(useracclist);
-            ep.getOrganizationDirectory().addNeworg(org);
+        }else{
+
+            Role newrole = new Role();
+            newrole.setType(role);
+
+            if (ep.getOrganizationDirectory().findOrgbyName(orgtype) != null) {
+                Organization org = ep.getOrganizationDirectory().findOrgbyName(orgtype);
+                UserAccountDirectory acclist = org.getAcclist();
+                acclist.createUser(username, password, ee, newrole);
+                UserAccountDirectory epacclist = ep.getEeacclist();
+                epacclist.createUser(username, password, ee, newrole);
+            } else {
+                Organization org = new Organization(orgtype);
+                org.setName(orgtype);
+                UserAccountDirectory useracclist = new UserAccountDirectory();
+                useracclist.createUser(username, password, ee, newrole);
+                UserAccountDirectory epacclist = ep.getEeacclist();
+                epacclist.createUser(username, password, ee, newrole);
+                org.setAcclist(useracclist);
+                ep.getOrganizationDirectory().addNeworg(org);
+            }
+
+            JOptionPane.showMessageDialog(this, "New employee's user account created successfully.");
+
         }
-        
-        JOptionPane.showMessageDialog(this, "New employee's user account created successfully.");
-        
-        
         
         
     }//GEN-LAST:event_btnCreateActionPerformed

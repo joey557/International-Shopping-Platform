@@ -6,6 +6,7 @@ package UserInterface.SystemAdminRole;
 
 import Business.Business;
 import Business.Enterprise.Enterprise;
+import Business.Regex.Valid;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -47,6 +48,8 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 244, 244));
 
         tableEnterprise.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,12 +167,17 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         } else {
             String name = (String) tableEnterprise.getModel().getValueAt(selectedRow, 0);
             
-            Enterprise ep = business.getEnterpriselist().findEpByName(name);
-            UserAccount acc = ep.getAcc();
-            acc.setUsername(username);
-            acc.setPassword(password);
-            JOptionPane.showMessageDialog(this, "Username and password has been successfully updated.");
-            populateTable();
+            if (!Valid.getInstance().validPassword(password)) {
+                JOptionPane.showMessageDialog(null, "Please enter valid username and password", "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                Enterprise ep = business.getEnterpriselist().findEpByName(name);
+                UserAccount acc = ep.getAcc();
+                acc.setUsername(username);
+                acc.setPassword(password);
+                JOptionPane.showMessageDialog(this, "Username and password has been successfully updated.");
+                populateTable();
+            }
             
         }
         

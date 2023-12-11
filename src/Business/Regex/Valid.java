@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *
  * @author peifang
  */
-class Valid {
+public class Valid {
     private static Valid vald;
     
     public static Valid getInstance(){
@@ -41,7 +41,7 @@ class Valid {
         }
     }
     public boolean validPassword(String password){
-        Pattern p = Pattern.compile("^(?=.*[A-Z])[a-zA-Z0-9]+$");
+        Pattern p = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
         Matcher m = p.matcher(password);
         if(m.find()){
             return true;

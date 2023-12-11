@@ -50,6 +50,8 @@ public class OrderStatusJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

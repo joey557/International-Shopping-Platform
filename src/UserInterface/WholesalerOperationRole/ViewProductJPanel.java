@@ -45,6 +45,8 @@ public class ViewProductJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Category" }));
         comboType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

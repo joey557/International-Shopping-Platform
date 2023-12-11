@@ -41,7 +41,7 @@ public class ProcessRequestJPanel extends javax.swing.JPanel {
         txtResults = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(234, 244, 244));
 
         btnSubmit.setText("Submit Result");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -50,7 +50,7 @@ public class ProcessRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblResult.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblResult.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         lblResult.setText("Result:");
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -84,7 +84,7 @@ public class ProcessRequestJPanel extends javax.swing.JPanel {
                 .addComponent(txtResults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Order.Order;
 import Business.Order.OrderItem;
 import Business.Product.Product;
+import Business.Regex.Valid;
 import UserInterface.EcommerceSales.EcommerceSalesMenuJPanel;
 import UserInterface.WholesalerOperationRole.*;
 import javax.swing.JOptionPane;
@@ -47,10 +48,7 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        comboType = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
         btnRefresh = new javax.swing.JButton();
         btnSetPrice = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,19 +57,12 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
 
-        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Category", " " }));
+        setBackground(new java.awt.Color(234, 244, 244));
 
         jButton1.setText("<< Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
             }
         });
 
@@ -123,9 +114,7 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,12 +122,6 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(btnSetPrice)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSearch))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
                 .addContainerGap(170, Short.MAX_VALUE))
@@ -149,12 +132,7 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(lblTitle)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(89, 89, 89)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,65 +146,6 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) tblProduct.getModel();
-        model.setRowCount(0);
-        String searchType = comboType.getSelectedItem().toString();
-        String keyword = txtSearch.getText();
-        
-        if (searchType.equals("ID")) {
-        for (Product product: business.getEcommerceproductlist().getProductDirectory()){
-            if (Integer.toString(product.getId()).equals(keyword)){
-
-                Object row[] = new Object[7];
-                row[0] = product;
-                row[1] = product.getId();
-                row[2] = product.getCategory();
-                row[3] = product.getPrice(); 
-                row[4] = product.getQuantity();
-                row[5] = product.getDescription();
-                row[6] = product.getSellPrice();
-                model.addRow(row);
-                }
-            }
-        }
-        
-        if (searchType.equals("Name")) {
-        for (Product product: business.getEcommerceproductlist().getProductDirectory()){
-            if ((product.getName()).equals(keyword)){
-
-                Object row[] = new Object[7];
-                row[0] = product;
-                row[1] = product.getId();
-                row[2] = product.getCategory();
-                row[3] = product.getPrice(); 
-                row[4] = product.getQuantity();
-                row[5] = product.getDescription();
-                row[6] = product.getSellPrice();
-                model.addRow(row);
-                }
-            }
-        }
-        
-        if (searchType.equals("Category")) {
-        for (Product product: business.getEcommerceproductlist().getProductDirectory()){
-            if ((product.getCategory()).equals(keyword)){
-
-                Object row[] = new Object[7];
-                row[0] = product;
-                row[1] = product.getId();
-                row[2] = product.getCategory();
-                row[3] = product.getPrice(); 
-                row[4] = product.getQuantity();
-                row[5] = product.getDescription();
-                row[6] = product.getSellPrice();
-                model.addRow(row);
-                }
-            }
-        }
-    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtSellPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSellPriceActionPerformed
         // TODO add your handling code here:
@@ -246,8 +165,14 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
         }
         else {
             Product selectedproduct = (Product)tblProduct.getValueAt(selectedRow, 0);
-            selectedproduct.setSellPrice(Integer.parseInt(txtSellPrice.getText()));
-            JOptionPane.showMessageDialog(this, "Sell price set successfully.");
+            String input = txtSellPrice.getText();
+            if (!Valid.getInstance().validNum(input)) {
+                JOptionPane.showMessageDialog(null, "Priece should be numbers", "Warning", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+                selectedproduct.setSellPrice(Integer.parseInt(txtSellPrice.getText()));
+                JOptionPane.showMessageDialog(this, "Sell price set successfully.");
+            }
         }
     }//GEN-LAST:event_btnSetPriceActionPerformed
 
@@ -262,15 +187,12 @@ public class EcoViewProductJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSetPrice;
-    private javax.swing.JComboBox<String> comboType;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblProduct;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSellPrice;
     // End of variables declaration//GEN-END:variables
 

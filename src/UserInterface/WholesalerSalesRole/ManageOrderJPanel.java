@@ -49,6 +49,8 @@ public class ManageOrderJPanel extends javax.swing.JPanel {
         tblOrder = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 244, 244));
+
         btnDetail.setText("View Details");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
